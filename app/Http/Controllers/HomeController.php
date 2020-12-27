@@ -28,5 +28,10 @@ class HomeController extends Controller
         return view('customer.index',compact('active'));
     }
 
+    public function profile (){
+        $customer = auth()->user();
+        return view('customer.profile',compact('customer'));
+    }
+
 
 }

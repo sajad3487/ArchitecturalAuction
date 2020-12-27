@@ -162,7 +162,7 @@
 
                         <!--begin::Form group-->
                         <div class="form-group">
-                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('name') is-invalid @enderror" type="text" placeholder="{{ __('Name') }}" name="name"  autocomplete="off" value="{{ old('name') }}"/>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6 @error('name') is-invalid @enderror" type="text" placeholder="First Name" name="name"  autocomplete="off" value="{{ old('name') }}"/>
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -171,7 +171,7 @@
                         </div>
                         <!--end::Form group-->
                             <div class="form-group">
-                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="text" placeholder="{{ __('Business Name') }}" name="business_name"  autocomplete="off" value="{{ old('business_name') }}"/>
+                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="text" placeholder="Last Name" name="lname"  autocomplete="off" value="{{ old('business_name') }}"/>
                             </div>
                         <!--begin::Form group-->
                         <div class="form-group">

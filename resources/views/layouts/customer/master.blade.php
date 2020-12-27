@@ -4,7 +4,7 @@
 <head>
     <base href="{{url('/')}}">
     <meta charset="utf-8"/>
-    <title>E-Packz - Pack Your Brand Succesfully</title>
+    <title>Glordyg</title>
     <meta name="description" content="Aside light theme example"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -33,8 +33,9 @@
 
     <!--end::Layout Themes-->
 
-    <link rel="shortcut icon" href="{{asset('media/logos/favicon.png')}}"/>
+    <link rel="shortcut icon" href="{{asset('media/logos/fav.png')}}"/>
     <link href="{{asset('css/pages/wizard/wizard-1.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('css/pages/wizard/wizard-3.css')}}" rel="stylesheet" type="text/css"/>
 
 
 </head>
@@ -49,7 +50,7 @@
 <div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed ">
     <!--begin::Logo-->
     <a href="{{url('/')}}">
-        <img alt="Logo" src="{{asset('media/logos/logo-transperant-1.png')}}" style="width: 40%"/>
+        <img alt="Logo" src="{{asset('media/logo.png')}}" style="width: 40%"/>
     </a>
     <!--end::Logo-->
 
@@ -227,7 +228,7 @@
 
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{asset('js/pages/widgets.js')}}"></script>
-<script src="{{asset('js/pages/custom/wizard/wizard-1.js')}}"></script>
+<script src="{{asset('js/pages/custom/wizard/wizard-3.js')}}"></script>
 <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

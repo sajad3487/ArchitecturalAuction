@@ -21,13 +21,24 @@ Route::group(['middleware'=>'auth'],function (){
    Route::group(['middleware'=>'CheckUser'],function (){
        Route::get('/', 'HomeController@index');
 
-       Route::get('/home', 'HomeController@index')->name('home');
+       Route::group(['prefix'=>'profile'],function (){
+           Route::get('/','HomeController@profile');
+           Route::post('/update','HomeController@updateProfile');
+       });
+
+
+
+
+
+
+
+
 
        Route::get('/category/{category_id}', 'HomeController@indexCategory');
 
        Route::get('/search','HomeController@searchProduct');
 
-       Route::group(['prefix'=>'contacts','middleware'=>'auth'],function (){
+       Route::group(['prefix'=>'contacts'],function (){
            Route::get('/', 'AddressController@index');
            Route::get('/create', 'AddressController@create');
            Route::post('/store', 'AddressController@store');
@@ -36,11 +47,9 @@ Route::group(['middleware'=>'auth'],function (){
            Route::get('/{contact_id}/delete', 'AddressController@destroy');
        });
 
-       Route::group(['prefix'=>'profile','middleware'=>'auth'],function (){
-           Route::get('/','HomeController@profile');
-           Route::post('/update','HomeController@updateProfile');
-       });
-
 
    });
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
 });
