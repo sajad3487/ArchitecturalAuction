@@ -138,13 +138,163 @@
 
                                         <!--begin: Wizard Step 2-->
                                         <div class="pb-5" data-wizard-type="step-content">
-
+                                            <div class="row">
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-1.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-2.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-3.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card card-custom overlay">
+                                                        <div class="card-body p-0">
+                                                            <div class="overlay-wrapper">
+                                                                <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
+                                                            </div>
+                                                            <div class="overlay-layer">
+                                                                <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
+                                                                <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!--end: Wizard Step 2-->
 
                                         <!--begin: Wizard Step 3-->
                                         <div class="pb-5" data-wizard-type="step-content">
-
+                                            <div class="user-comment">
+                                                <div class="comments-section">
+                                                    <div class="comment-post">
+                                                        <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"/></div>
+                                                        <div class="comment-details">
+                                                            <p><span class="comment-author">Owner</span><span class="comment-time"></span></p>
+                                                            <p class="comment-content">Maecenas eu maximus tellus, vel placerat massa. Nullam neque magna, hendrerit ac lacinia in, consequat nec ipsum. Vivamus tincidunt fringilla diam et sagittis. Suspendisse tincidunt hendrerit nisi, sit amet aliquet enim ornare at.</p>
+                                                            <div class="comment-like-unlike">
+                                                                <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-post-reply">
+                                                        <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"/></div>
+                                                        <div class="comment-details">
+                                                            <p><span class="comment-author">Designer</span><span class="comment-time"></span></p>
+                                                            <p class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                                                            <div class="comment-like-unlike">
+                                                                <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-post">
+                                                        <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"/></div>
+                                                        <div class="comment-details">
+                                                            <p><span class="comment-author">Owner</span><span class="comment-time"></span></p>
+                                                            <p class="comment-content">Nullam neque magna, hendrerit ac lacinia in, consequat nec ipsum. Vivamus tincidunt fringilla diam et sagittis. Suspendisse tincidunt hendrerit nisi, sit amet aliquet enim ornare at.</p>
+                                                            <div class="comment-like-unlike">
+                                                                <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-add">
+                                                        <div class="field-comment">
+                                                            <textarea rows="4" cols="50"></textarea>
+                                                            <a class="btn btn--blue btn--medium pull-right" href="#">Post Your Question</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
                                         <!--end: Wizard Step 3-->

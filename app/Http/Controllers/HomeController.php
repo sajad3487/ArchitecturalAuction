@@ -17,20 +17,36 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(){
+        return view('welcome');
+    }
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function designer_index()
     {
         $active = 1;
         return view('customer.index',compact('active'));
     }
 
-    public function profile (){
+    public function designer_profile (){
         $customer = auth()->user();
-        return view('customer.profile',compact('customer'));
+        $active = 4;
+        return view('customer.profile',compact('customer','active'));
+    }
+
+    public function owner_index (){
+        $active = 1;
+        return view('owner.index',compact('active'));
+    }
+
+    public function owner_profile (){
+        $customer = auth()->user();
+        $active = 5;
+        return view('owner.profile',compact('customer','active'));
     }
 
 

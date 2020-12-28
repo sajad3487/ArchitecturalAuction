@@ -18,19 +18,13 @@ Auth::routes();
 //        dd($request->all());
 //});
 Route::group(['middleware'=>'auth'],function (){
-   Route::group(['middleware'=>'CheckUser'],function (){
-       Route::get('/', 'HomeController@index');
+   Route::group(['prefix'=>'designer','middleware'=>'CheckUser'],function (){
 
+       Route::get('/', 'HomeController@designer_index')->name('home');
        Route::group(['prefix'=>'profile'],function (){
-           Route::get('/','HomeController@profile');
+           Route::get('/','HomeController@designer_profile');
            Route::post('/update','HomeController@updateProfile');
        });
-
-
-
-
-
-
 
 
 
@@ -50,6 +44,21 @@ Route::group(['middleware'=>'auth'],function (){
 
    });
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::group(['prefix'=>'owner','middleware'=>'CheckOwner'],function (){
 
+        Route::get('/','HomeController@owner_index');
+        Route::group(['prefix'=>'profile'],function (){
+            Route::get('/','HomeController@owner_profile');
+            Route::post('/update','HomeController@updateProfile');
+        });
+    });
+
+});
+
+Route::get('/', function (){
+    return view('welcome');
+});
+
+Route::get('home',function (){
+    return redirect('designer');
 });

@@ -5,11 +5,8 @@ namespace App\Http\Middleware;
 use App\Http\Services\UserService;
 use Closure;
 
-class CheckUser
+class CheckOwner
 {
-    /**
-     * @var UserService
-     */
     private $userService;
 
     public function __construct(
@@ -18,6 +15,8 @@ class CheckUser
     {
         $this->userService = $userService;
     }
+
+
     /**
      * Handle an incoming request.
      *
@@ -28,11 +27,10 @@ class CheckUser
     public function handle($request, Closure $next)
     {
         $user = $this->userService->getUserById(auth()->id());
-        if ($user->user_type == 1){
+        if ($user->user_type == 2){
             return $next($request);
-        }elseif ($user->user_type == 2){
-//            dd('hi');
-            return redirect('/owner');
+        }elseif ($user->user_type == 1){
+            return redirect('/designer');
         }
         else{
             return redirect('/admin');

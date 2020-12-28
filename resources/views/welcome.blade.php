@@ -78,6 +78,11 @@
                     @endauth
                 </div>
             @endif
+                <form action="{{url('/logout')}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</button>
+
+                </form>
 
             <div class="content">
                 <div class="title m-b-md">

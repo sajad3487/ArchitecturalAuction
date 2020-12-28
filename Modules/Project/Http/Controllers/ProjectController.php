@@ -22,6 +22,21 @@ class ProjectController extends Controller
 
     public function designer_project (){
         return view('customer.designer_project');
-
     }
+
+    public function owner_project (){
+        $active = 4 ;
+        return view('owner.all_project',compact('active'));
+    }
+
+    public function owner_new_project (){
+        $active = 2 ;
+        return view('owner.new_project',compact('active'));
+    }
+
+    public function owner_active_project (){
+        $active = 3 ;
+        return view('owner.all_project',compact('active'));
+    }
+
 }

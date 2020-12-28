@@ -113,18 +113,18 @@
     <!--begin::Page-->
     <div class="d-flex flex-row flex-column-fluid page">
 
-        @include('layouts.customer.Sidebar')
+        @include('layouts.owner.Sidebar')
 
 
 
 
         <!--begin::Wrapper-->
         <div class="d-flex flex-column flex-row-fluid wrapper pt-22" style="margin-left: -30px" id="kt_wrapper">
-            @include('layouts.customer.Header')
+            @include('layouts.owner.Header')
 
             @yield('content')
 
-            @include('layouts.customer.Footer')
+            @include('layouts.owner.Footer')
         </div>
         <!--end::Wrapper-->
     </div>
@@ -133,7 +133,7 @@
 <!--end::Main-->
 
 
-@include('layouts.customer.rightSidebar')
+@include('layouts.owner.rightSidebar')
 
 
 @include('layouts.admin.QuickUser')
