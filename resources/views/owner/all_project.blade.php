@@ -17,7 +17,7 @@
                             <div class="card-body rounded p-0 d-flex bg-light justify-content-between">
                                 <div
                                     class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-650px py-10 py-md-6 px-6 px-md-20 pr-lg-0">
-                                    <h1 class="font-weight-bolder text-dark mb-3">All Project</h1>
+                                    <h1 class="font-weight-bolder text-dark mb-3">Previous Projects</h1>
                                 {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
 
                                 </div>

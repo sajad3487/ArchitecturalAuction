@@ -33,21 +33,32 @@
                         <div class="card-body">
                             <!--begin::Accordion-->
                             <div class="accordion accordion-solid accordion-toggle-plus" id="accordion3">
+                                @if(isset($categories))
                                 @foreach($categories as $category)
                                     <div class="card">
-                                        <div class="card-header" id="category-{{$category->id}}">
-                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#collapse-{{$category->id}}">
-                                                {{$category->title}}
+                                        <div class="card-header" id="category-{{$category->id ?? ''}}">
+                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#collapse-{{$category->id ?? ''}}">
+                                                {{$category->title ?? ''}}
+                                                <div class="ml-10">
+                                                    @if($category->status ==1 )
+                                                        <span class="label font-weight-bold label-lg label-light-success label-inline">Active</span>
+
+                                                    @else
+                                                        <span class="label font-weight-bold label-lg label-light-danger label-inline">Inactive</span>
+
+                                                    @endif
+                                                </div>
                                             </div>
+
                                         </div>
-                                        <div id="collapse-{{$category->id}}" class="collapse"  data-parent="#category-{{$category->id}}">
+                                        <div id="collapse-{{$category->id ?? ''}}" class="collapse"  data-parent="#category-{{$category->id ?? ''}}">
                                             <div class="card-body">
                                                 <div class="overflow-auto">
 
                                                 <div class="btn-group">
 
                                                     <form  method="post">
-                                                        <a href="{{url("/admin/products/createWithCat/$category->id")}}" class="btn btn-outline-success font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
+                                                        <a href="{{url("/admin/categories/$category->id/subCategory")}}" class="btn btn-outline-success font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
                                                             <i class="la la-plus p-0"></i></a>
                                                         <a href="{{url("/admin/categories/$category->id/edit")}}" class="btn btn-outline-warning font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
                                                             <i class="la la-edit p-0"></i></a>
@@ -61,29 +72,36 @@
                                                         <th>#</th>
                                                         <th>Title</th>
                                                         <th>Description</th>
-                                                        <th>Material</th>
-                                                        <th>Dimension</th>
                                                         <th>Image</th>
-                                                        <th>Price</th>
+                                                        <th>status</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                    @foreach($category->product as $product)
+                                                    @if($category->subCategory != null)
+                                                    @foreach($category->subCategory as $subCat)
                                                         <tr>
-                                                            <td>{{$product->id}}</td>
-                                                            <td>{{$product->title}}</td>
-                                                            <td>{{$product->description}}</td>
-                                                            <td>{{$product->material}}</td>
-                                                            <td>{{$product->dimension}}</td>
-                                                            <td>{{$product->image}}</td>
-                                                            <td>{{$product->price}}</td>
+                                                            <td>{{$subCat->id ?? ''}}</td>
+                                                            <td>{{$subCat->title ?? ''}}</td>
+                                                            <td>{{$subCat->description ?? ''}}</td>
+                                                            <td class="text-center">
+                                                                <a href="{{$subCat->image_path ?? ''}}" target="_blank"><img src="{{$subCat->image_path ?? ''}}" style="width: 50px;height: 50px" alt=""></a>
+                                                            </td>
+                                                            <td>
+                                                                @if(isset($subCat->status) && $subCat->status == 1)
+                                                                    <span class="label font-weight-bold label-lg label-light-success label-inline">Active</span>
+                                                                @else
+                                                                    <span class="label font-weight-bold label-lg label-light-danger label-inline">Inactive</span>
+                                                                @endif
+                                                            </td>
                                                             <td style='white-space: nowrap'>
-                                                                <a href="{{url("/admin/products/$product->id/edit")}}"><i class="far fa-edit text-warning mr-5"></i></a>
-                                                                <a href="{{url("/admin/products/$product->id/delete")}}"><i class="fas fa-trash-alt text-danger mr-5"></i></a>
+                                                                <a href="{{url("/admin/categories/$subCat->id/edit")}}"><i class="far fa-edit text-warning mr-5"></i></a>
+                                                                <a href="{{url("/admin/categories/$subCat->id/delete")}}"><i class="fas fa-trash-alt text-danger mr-5"></i></a>
                                                             </td>
                                                          </tr>
                                                      @endforeach
+                                                        @endif
                                                     </tbody>
 
                                                 </table>
@@ -93,6 +111,7 @@
                                     </div>
 
                                 @endforeach
+                                    @endif
                             </div>
                             <!--end::Accordion-->
 

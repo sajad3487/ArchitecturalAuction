@@ -34,7 +34,7 @@ class ProposalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -44,7 +44,7 @@ class ProposalController extends Controller
      */
     public function show($id)
     {
-        return view('project::show');
+        return view('owner.owner_proposal');
     }
 
     /**

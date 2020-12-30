@@ -1,4 +1,4 @@
-@extends('layouts.customer.master')
+@extends('layouts.owner.master')
 @section('content')
 
     <!--begin::Content-->
@@ -327,21 +327,21 @@
                                     <!--end::Body-->
 
                                     <!--begin::Footer-->
-                                {{--                                    <div class="card-footer pb-0">--}}
-                                {{--                                        <div class="row">--}}
-                                {{--                                            <div class="col-xl-2"></div>--}}
-                                {{--                                            <div class="col-xl-7">--}}
-                                {{--                                                <div class="row">--}}
-                                {{--                                                    <div class="col-3"></div>--}}
-                                {{--                                                    <div class="col-9">--}}
-                                {{--                                                        <a href="#" class="btn btn-light-primary font-weight-bold">Save changes</a>--}}
-                                {{--                                                        <a href="#" class="btn btn-clean font-weight-bold">Cancel</a>--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                    </div>--}}
-                                <!--end::Footer-->
+{{--                                    <div class="card-footer pb-0">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-xl-2"></div>--}}
+{{--                                            <div class="col-xl-7">--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-3"></div>--}}
+{{--                                                    <div class="col-9">--}}
+{{--                                                        <a href="#" class="btn btn-light-primary font-weight-bold">Save changes</a>--}}
+{{--                                                        <a href="#" class="btn btn-clean font-weight-bold">Cancel</a>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+                                    <!--end::Footer-->
 
                                 </div>
                                 <!--end::Tab-->

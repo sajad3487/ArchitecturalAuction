@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class category extends Model
 {
-    protected $fillable = [];
+    protected $fillable = [
+        'title',
+        'description',
+        'image_path',
+        'parent_id',
+        'status',
+    ];
+
+    public function subCategory (){
+        return $this->hasMany(Category::class,'parent_id','id');
+    }
 }
