@@ -10,7 +10,7 @@
             <!--begin::Container-->
             <div class=" container ">
                 <div class="row">
-                    <div class="col-xl-12 mb-3">
+                    <div class="col-xl-12">
 
                         <!--begin::Engage Widget 15-->
                         <div class="card card-custom ">
@@ -40,41 +40,71 @@
         <div class="d-flex flex-column-fluid">
             <!--begin::Container-->
             <div class=" container ">
-
-
                 <!--begin::Row-->
                 <div class="row">
-
+                    @foreach($projects as $key=>$project)
                     <div class="col-md-4">
                         <!--begin::Nav Panel Widget 4-->
                         <div class="card card-custom card-stretch gutter-b">
                             <!--begin::Body-->
-                            <div class="card-body">
+                            <div class="card-body px-6">
                                 <!--begin::Wrapper-->
                                 <div class="d-flex justify-content-between flex-column h-100">
                                     <!--begin::Container-->
                                     <div class="h-100">
                                         <!--begin::Header-->
-                                        <div class="d-flex flex-column flex-center">
+                                        <div class="d-flex flex-column flex-center" >
                                             <!--begin::Image-->
-                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url({{asset('media/stock-600x400/img-26.jpg')}})"></div>
+                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url({{asset($project->project_image[0]->media_path)}})"></div>
                                             <!--end::Image-->
-
                                             <!--begin::Title-->
-                                            <a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">Maths Class</a>
+                                            <a href="{{url("owner/project/$project->id/view")}}" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
+                                                <h1>{{$project->title ?? ''}}</h1>
+                                            </a>
                                             <!--end::Title-->
 
                                             <!--begin::Text-->
-                                            <div class="font-weight-bold text-dark-50 font-size-sm pb-7">11:20-12:00, Mark Liam</div>
+                                            <div class="font-weight-bold text-dark-50 font-size-sm pb-7"></div>
+                                            <input type="text" class="d-none" id="deadline-{{$key}}" value="{{$project->deadline}}">
                                             <!--end::Text-->
+                                            <p class="pcounter" id="demo-{{$key}}"></p>
+
+                                            <script>
+                                                var deadline{{$key}} = document.getElementById('deadline-{{$key}}').value;
+                                                var countDownDate{{$key}} = new Date(deadline{{$key}}).getTime();
+
+                                                // Update the count down every 1 second
+                                                var x{{$key}} = setInterval(function() {
+
+                                                    // Get today's date and time
+                                                    var now{{$key}} = new Date().getTime();
+                                                    // Find the distance between now and the count down date
+                                                    var distance{{$key}} = countDownDate{{$key}} - now{{$key}};
+
+                                                    // Time calculations for days, hours, minutes and seconds
+                                                    var days{{$key}} = Math.floor(distance{{$key}} / (1000 * 60 * 60 * 24));
+                                                    var hours{{$key}} = Math.floor((distance{{$key}} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                    var minutes{{$key}} = Math.floor((distance{{$key}} % (1000 * 60 * 60)) / (1000 * 60));
+                                                    var seconds{{$key}} = Math.floor((distance{{$key}} % (1000 * 60)) / 1000);
+                                                    // Output the result in an element with id="demo"
+                                                    document.getElementById('demo-{{$key}}').innerHTML = days{{$key}} + "d " + hours{{$key}} + "h "
+                                                        + minutes{{$key}} + "m " + seconds{{$key}} + "s ";
+
+                                                    // If the count down is over, write some text
+                                                    if (distance{{$key}} < 0) {
+                                                        clearInterval(x);
+                                                        document.getElementById('demo-{{$key}}').innerHTML = "EXPIRED";
+                                                    }
+                                                }, 1000);
+                                            </script>
                                         </div>
                                         <!--end::Header-->
                                     </div>
                                     <!--eng::Container-->
 
                                     <!--begin::Footer-->
-                                    <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-                                        <h3 class="col-6">Price : 300 $</h3>
+                                    <div class="d-flex flex-center mt-md-5" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
+                                        <h3 class="col-6 px-0">Price : {{$project->net_price ?? ''}} $</h3>
 
                                         <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14" data-toggle="modal" data-target="#kt_chat_modal">View</button>
                                     </div>
@@ -86,11 +116,13 @@
                         </div>
                         <!--end::Nav Panel Widget 4-->
                     </div>
+                    @endforeach
                 </div>
                 <!--end::Row-->
             </div>
             <!--end::Container-->
         </div>
     </div>
+
     <!--end::Content-->
 @endsection

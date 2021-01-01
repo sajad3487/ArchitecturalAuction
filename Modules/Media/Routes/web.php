@@ -1,16 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::group(['prefix'=>'media'],function (){
 
-Route::prefix('media')->group(function() {
-    Route::get('/', 'MediaController@index');
+    Route::group(['prefix'=>'owner'],function (){
+        Route::get('{media_id}/delete','MediaController@destroy');
+        Route::post('{project_id}/upload_project_image','MediaController@ownerUploadImageProject');
+    });
+
 });

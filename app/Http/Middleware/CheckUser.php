@@ -31,7 +31,6 @@ class CheckUser
         if ($user->user_type == 1){
             return $next($request);
         }elseif ($user->user_type == 2){
-//            dd('hi');
             return redirect('/owner');
         }
         else{

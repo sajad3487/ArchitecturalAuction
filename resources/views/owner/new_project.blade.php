@@ -17,7 +17,13 @@
                             <div class="card-body rounded p-0 d-flex bg-light justify-content-between">
                                 <div
                                     class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-650px py-10 py-md-6 px-6 px-md-20 pr-lg-0">
-                                    <h1 class="font-weight-bolder text-dark mb-2">New Project</h1>
+                                    <h1 class="font-weight-bolder text-dark mb-2">
+                                        @if(isset($project))
+                                            Project No : {{$project->id ?? ''}}
+                                            @else
+                                            New Project
+                                            @endif
+                                    </h1>
                                 {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
 
                                 </div>
@@ -48,7 +54,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input type="text" name="title" class="form-control form-control-solid" placeholder="Project title"/>
+                                    <input type="text" name="title" class="form-control form-control-solid" value="{{old('title') ?? $project->title ?? ''}}" placeholder="Project title"/>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -57,9 +63,9 @@
                                             <select class="form-control form-control-solid" name="category_id">
                                                 <option>Please select your category</option>
                                                 @foreach($categories as $category)
-                                                <option value="{{$category->id ?? ''}}">{{$category->title ?? ''}}</option>
+                                                <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">{{$category->title ?? ''}}</option>
                                                     @foreach($category->subCategory as $subCate)
-                                                        <option value="{{$category->id ?? ''}}">--- {{$subCate->title ?? ''}}</option>
+                                                        <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">--- {{$subCate->title ?? ''}}</option>
                                                         @endforeach
                                                     @endforeach
                                             </select>
@@ -583,38 +589,50 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Size (m2)</label>
-                                            <input type="number" name="size" class="form-control form-control-solid" placeholder="Project size"/>
+                                            <input type="number" value="{{old('size') ?? $project->size ?? ''}}" name="size" class="form-control form-control-solid" placeholder="Project size"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" name="address" class="form-control form-control-solid" placeholder="Project address"/>
+                                    <input type="text" name="address" class="form-control form-control-solid" placeholder="Project address" value="{{old('address') ?? $project->address ?? ''}}"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleTextarea">Description</label>
-                                    <textarea name="description" class="form-control form-control-solid" rows="3"></textarea>
+                                    <textarea name="description" class="form-control form-control-solid" rows="3" >{{old('description') ?? $project->description ?? ''}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleTextarea">Objectives</label>
-                                    <textarea name="objective" class="form-control form-control-solid" rows="3"></textarea>
+                                    <textarea name="objective" class="form-control form-control-solid" rows="3" >{{old('objective') ?? $project->objective ?? ''}}</textarea>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="exampleTextarea">Deadline</label>
-                                    <div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
-                                        <input type="text" name="deadline" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_1"/>
-                                        <div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
-                                        <span class="input-group-text">
-                                            <i class="ki ki-calendar"></i>
-                                        </span>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label for="exampleTextarea">Deadline</label>
+                                        <div class="">
+                                            <input type="text" name="deadline" class="form-control" id="kt_datepicker_1"  readonly placeholder="Select date" value="{{old('deadline') ?? $project->deadline ?? ''}}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group  col-md-4 ">
+                                        <label>File Browser</label>
+                                        <div></div>
+                                        <div class="custom-file">
+                                            <input type="file" name="file" class="custom-file-input" id="customFile"/>
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label class="col-form-label text-right col-lg-3 col-sm-12">Minimum Setup</label>--}}
+{{--                                    <div class="col-lg-4 col-md-9 col-sm-12">--}}
+{{--                                        <input type="text" name="deadline" class="form-control" id="kt_datepicker_1"  readonly placeholder="Select date"/>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
 
                             <div class="card-footer">
+                                <a href="@if(isset($project)) {{url("owner/project/$project->id/view")}}@else{{url('owner/project')}}@endif" class="btn btn-secondary">Cancel</a>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
                         </form>
 
@@ -628,72 +646,5 @@
     </div>
     <!--end::Content-->
 
-    <script !src="">
-
-
-        // Demo 1
-        $('#kt_datetimepicker_1').datetimepicker();
-
-        // Demo 2
-        $('#kt_datetimepicker_2').datetimepicker({
-            locale: 'de'
-        });
-
-        // Demo 3
-        $('#kt_datetimepicker_3').datetimepicker({
-            format: 'L'
-        });
-
-        // Demo 4
-        $('#kt_datetimepicker_4').datetimepicker({
-            format: 'LT'
-        });
-
-        // Demo 5
-        $('#kt_datetimepicker_5').datetimepicker();
-
-        // Demo 6
-        $('#kt_datetimepicker_6').datetimepicker({
-            defaultDate: '11/1/2020',
-            disabledDates: [
-                moment('12/25/2020'),
-                new Date(2020, 11 - 1, 21),
-                '11/22/2022 00:53'
-            ]
-        });
-
-        // Demo 7
-        $('#kt_datetimepicker_7_1').datetimepicker();
-        $('#kt_datetimepicker_7_2').datetimepicker({
-            useCurrent: false
-        });
-
-        $('#kt_datetimepicker_7_1').on('change.datetimepicker', function(e) {
-            $('#kt_datetimepicker_7_2').datetimepicker('minDate', e.date);
-        });
-        $('#kt_datetimepicker_7_2').on('change.datetimepicker', function(e) {
-            $('#kt_datetimepicker_7_1').datetimepicker('maxDate', e.date);
-        });
-
-        // Demo 8
-        $('#kt_datetimepicker_8').datetimepicker({
-            inline: true,
-        });
-
-        // Demo 9
-        $('#kt_datetimepicker_9').datetimepicker();
-
-        // Demo 10
-        $('#kt_datetimepicker_10').datetimepicker({
-            locale: 'de'
-        });
-
-        // Demo 11
-        $('#kt_datetimepicker_11').datetimepicker({
-            format: 'L'
-        });
-
-
-    </script>
 
 @endsection

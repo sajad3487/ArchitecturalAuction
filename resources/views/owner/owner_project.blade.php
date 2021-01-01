@@ -15,7 +15,7 @@
                             <div class="card-body rounded p-0 d-flex bg-light justify-content-between">
                                 <div
                                     class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-650px py-10 py-md-6 px-6 px-md-20 pr-lg-0">
-                                    <h1 class="font-weight-bolder text-dark mb-2">Project No: 1</h1>
+                                    <h1 class="font-weight-bolder text-dark mb-2">Project No: {{$project->id ?? ''}}</h1>
                                     {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
 
                                 </div>
@@ -34,7 +34,6 @@
             <!--end::Container-->
         </div>
         <!--end::Entry-->
-
         <div class="d-flex flex-column-fluid">
             <!--begin::Container-->
             <div class=" container ">
@@ -107,31 +106,31 @@
 
                     <!--begin::Card body-->
                     <div class="card-body px-0">
-                        <form class="form" id="kt_form">
-                            <div class="tab-content">
+                            <div class="tab-content ">
                                 <!--begin::Tab-->
                                 <div class="tab-pane show active px-7" id="kt_user_edit_tab_1" role="tabpanel">
                                     <div class="pb-5 px-5">
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <h1>Project Title</h1>
-                                                <h4>Project Subtitle</h4>
+                                                <h1>{{$project->title ?? ''}}</h1>
+                                                <h4>{{$project->subtitle ?? ''}}</h4>
                                             </div>
-                                            <div class="col-md-4">
-                                                <h1 class="text-success">1000 $</h1>
+                                            <div class="col-md-2">
+                                                <h1 class="text-success">{{$project->net_price ?? ''}} $</h1>
                                                 <h4>Price</h4>
                                             </div>
+                                            <a href="{{url("owner/project/$project->id/edit")}}" class="btn btn-warning h-40px mr-2 w-100px mt-md-2">Edit Project</a>
                                         </div>
-                                        <div class="row mt-10">
+                                        <div class="row mt-10 ">
                                             <div class="col-12">
                                                 <h4>Description:</h4>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                <p>{{$project->description ?? ''}}</p>
                                             </div>
                                         </div>
                                         <div class="row mt-5">
                                             <div class="col-12">
                                                 <h6>Objective:</h6>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                <p>{{$project->objective ?? ''}}</p>
                                             </div>
                                         </div>
                                         <div class="row mt-5">
@@ -146,14 +145,64 @@
                                         </div>
                                         <div class="row mt-5">
                                             <h6 class="col-md-3">Deadline for submission:</h6>
-                                            <p class="col-md-6">20/05/2020</p>
+                                            <p class="col-md-6">{{$project->deadline ?? ''}}</p>
                                         </div>
-                                        <div class="row">
-                                            <h6 class="col-md-3">Date of result:</h6>
-                                            <p class="col-md-6">20/05/2020</p>
-                                        </div>
+{{--                                        <div class="row">--}}
+{{--                                            <h6 class="col-md-3">Date of result:</h6>--}}
+{{--                                            <p class="col-md-6">20/05/2020</p>--}}
+{{--                                        </div>--}}
 
 
+                                    </div>
+                                </div>
+                                <!--end::Tab-->
+
+{{--                                <!--begin::Tab-->--}}
+                                <div class="tab-pane px-7" id="kt_user_edit_tab_2" role="tabpanel">
+                                            <!--begin::Form-->
+                                            <div class="px-15">
+
+                                                <form class="form" action="{{url("media/owner/$project->id/upload_project_image")}}" method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <h3 class="">
+                                                        Add new image
+                                                    </h3>
+                                                    <div class="row">
+                                                        <div class="form-group col-12 col-md-4 m-0">
+                                                            <label>Upload Image</label>
+                                                            <div></div>
+                                                            <div class="custom-file">
+                                                                <input type="file" name="file" class="custom-file-input" id="customFile"/>
+                                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-12 col-md-4 m-0">
+                                                            <label></label>
+                                                            <div></div>
+                                                            <div class="custom-file">
+                                                                <button type="submit" class="btn btn-success h-40px mr-2 w-100px mt-md-2">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!--end::Form-->
+                                    <div class="row min-h-300px pt-10" >
+                                        @foreach($images as $image)
+                                        <div class="col-md-3 mt-2">
+                                            <div class="card card-custom overlay">
+                                                <div class="card-body p-0">
+                                                    <div class="overlay-wrapper">
+                                                        <img src="{{asset($image->media_path)}}" alt="" class="w-100 rounded"/>
+                                                    </div>
+                                                    <div class="overlay-layer">
+                                                        <a href="{{url($image->media_path) ?? ''}}" target="_blank" class="btn font-weight-bold btn-primary btn-shadow" >view</a>
+                                                        <a href="{{url("media/owner/$image->id/delete")}}" class="btn font-weight-bold btn-light-danger btn-shadow ml-2">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            @endforeach
                                     </div>
                                 </div>
                                 <!--end::Tab-->
@@ -174,97 +223,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-2.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-3.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-4.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <!--end::Tab-->
@@ -347,7 +306,6 @@
                                 <!--end::Tab-->
 
                             </div>
-                        </form>
                     </div>
                     <!--begin::Card body-->
                 </div>

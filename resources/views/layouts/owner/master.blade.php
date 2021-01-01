@@ -38,6 +38,13 @@
     <link href="{{asset('css/pages/wizard/wizard-3.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/comment.css')}}" rel="stylesheet" type="text/css"/>
 
+    <style>
+        .pcounter {
+            text-align: center;
+            font-size: 25px;
+            margin-top: 0px;
+        }
+    </style>
 
 </head>
 <!--end::Head-->
@@ -230,6 +237,8 @@
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{asset('js/pages/widgets.js')}}"></script>
 <script src="{{asset('js/pages/custom/wizard/wizard-3.js')}}"></script>
+<script src="{{asset('js/pages/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
+
 <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

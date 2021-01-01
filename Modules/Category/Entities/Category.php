@@ -11,6 +11,9 @@ class category extends Model
         'description',
         'image_path',
         'parent_id',
+        'size',
+        'price',
+        'commission',
         'status',
     ];
 

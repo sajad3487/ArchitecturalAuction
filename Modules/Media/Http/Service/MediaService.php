@@ -28,4 +28,16 @@ class MediaService
         return '/image/' . $newFileName;
     }
 
+    public function createMedia ($data){
+        return $this->mediaRepository->create($data);
+    }
+
+    public function getImagesOfProject ($project_id){
+        return $this->mediaRepository->getMediaOfProject ($project_id);
+    }
+
+    public function deleteMedia ($id){
+        return $this->mediaRepository->delete($id);
+    }
+
 }

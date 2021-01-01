@@ -19,4 +19,10 @@ class MediaRepository extends Repository
         $this->model = new media();
     }
 
+    public function getMediaOfProject ($project_id){
+        return media::where ('type','project')
+            ->where ('owner_id',$project_id)
+            ->get();
+    }
+
 }

@@ -30,7 +30,7 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         $user = $this->userService->getUserById(auth()->id());
-        if ($user->user_type == 2 || $user->user_type == 3){
+        if ($user->user_type == 3){
             return $next($request);
         }else{
             return redirect('/');

@@ -41,7 +41,6 @@
                                             <div class="col-lg-3">
                                                 <input type="text" name="description" class="form-control" placeholder="Enter category description" value="{{old('description') ?? $category->description  ?? ''}}"/>
                                             </div>
-
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-2 col-form-label text-right">Picture :</label>
@@ -60,6 +59,22 @@
                                                         <option value="0">Inactive</option>
                                                     </select>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label text-right">Size (m2) :</label>
+                                            <div class="col-lg-3">
+                                                <input type="number" name="size" class="form-control" placeholder="Enter default size" value="{{old('size') ?? $category->size  ?? ''}}" required/>
+                                            </div>
+                                            <label class="col-lg-2 col-form-label text-right">Price :</label>
+                                            <div class="col-lg-3">
+                                                <input type="number" name="price" class="form-control" placeholder="Enter price per size" value="{{old('price') ?? $category->price  ?? ''}}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label text-right">Commission (%) :</label>
+                                            <div class="col-lg-3">
+                                                <input type="number" name="commission" class="form-control" placeholder="Enter percentage of commission" value="{{old('size') ?? $category->size  ?? ''}}" required/>
                                             </div>
                                         </div>
                                     </div>

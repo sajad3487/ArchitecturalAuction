@@ -27,8 +27,12 @@ class CreateProjectsTable extends Migration
             $table->string('address')->nullable();
             $table->string('location_lat')->nullable();
             $table->string('location_long')->nullable();
-            $table->date('deadline');
+            $table->timestamp('deadline');
+            $table->integer('size');
+            $table->integer('net_price');
+            $table->integer('total_price');
             $table->string('objective')->nullable();
+            $table->integer('status')->default(1);
 
             $table->timestamps();
         });

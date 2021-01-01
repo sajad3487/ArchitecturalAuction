@@ -109,7 +109,7 @@
                                       transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) "
                                       x="16.3255682" y="2.94551858" width="3" height="18" rx="1"/>
                             </g>
-                        </svg><!--end::Svg Icon--></span><span class="menu-text">Previous Project</span></a>
+                        </svg><!--end::Svg Icon--></span><span class="menu-text">All Project</span></a>
                 </li>
                 <li class="menu-item @if(isset($active) && $active == 5)menu-item-active @endif" aria-haspopup="true"><a href="{{url('owner/profile')}}" class="menu-link "><span
                             class="svg-icon menu-icon">
