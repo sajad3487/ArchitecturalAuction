@@ -26,9 +26,8 @@ Route::group(['prefix'=>'owner'],function (){
         Route::get('/{project_id}/pay','ProjectController@owner_pay_project');
         Route::get('/{project_id}/view','ProjectController@owner_view_project');
         Route::get('/{project_id}/edit','ProjectController@owner_edit_project');
+        Route::put('/{project_id}/update','ProjectController@owner_update_project');
     });
-
-
 
     Route::group(['prefix'=>'proposal'],function (){
         Route::get('/','ProposalController@index');
@@ -37,3 +36,26 @@ Route::group(['prefix'=>'owner'],function (){
 
 });
 
+Route::group(['prefix'=>'designer'],function () {
+    Route::group(['prefix' => 'project'], function () {
+
+        Route::get('/{project_id}/view','ProjectController@designer_view_project');
+
+    });
+
+    Route::group(['prefix' => 'proposal'], function () {
+
+        Route::get('/','ProposalController@designer_proposal');
+        Route::get('/{project_id}/create','ProposalController@designer_create_proposal');
+        Route::post('/store','ProposalController@designer_store_proposal');
+        Route::post('/{proposal_id}/add_file','ProposalController@designer_add_file_proposal');
+
+    });
+
+    Route::group(['prefix' => 'wall'], function () {
+
+        Route::post('/store','WallController@designer_store_question');
+
+    });
+
+});

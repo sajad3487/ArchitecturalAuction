@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Modules\Category\Http\Service\CategoryService;
 use Modules\Media\Http\Service\MediaService;
 use Modules\Project\Http\Service\ProjectService;
+use Modules\Project\Http\Service\ProposalService;
 
 class ProjectController extends Controller
 {
@@ -29,112 +30,165 @@ class ProjectController extends Controller
      * @var MediaService
      */
     private $mediaService;
+    /**
+     * @var ProposalService
+     */
+    private $proposalService;
 
     public function __construct(
         UserService $userService,
         CategoryService $categoryService,
         ProjectService $projectService,
-        MediaService $mediaService
+        MediaService $mediaService,
+        ProposalService $proposalService
     )
     {
         $this->userService = $userService;
         $this->categoryService = $categoryService;
         $this->projectService = $projectService;
         $this->mediaService = $mediaService;
+        $this->proposalService = $proposalService;
     }
 
-    public function designer_won_project (){
+    public function designer_won_project()
+    {
         $user = $this->userService->getUserById(auth()->id());
-        $active = 3 ;
-        return view('customer.you_won',compact('active','user'));
+        $active = 3;
+        return view('customer.you_won', compact('active', 'user'));
     }
 
-    public function designer_project (){
+    public function designer_project()
+    {
         return view('customer.designer_project');
     }
 
-    public function all_owner_project (){
+    public function designer_view_project($project_id)
+    {
+        $project = $this->projectService->getProject($project_id);
         $user = $this->userService->getUserById(auth()->id());
-        $active = 4 ;
-        return view('owner.all_project',compact('active','user'));
+        $active = 1;
+        $images = $this->mediaService->getImagesOfProject($project->id);
+        $proposal = $this->proposalService->getProposalForDesigner($project_id, auth()->id());
+        return view('customer.designer_project', compact('user', 'active', 'project', 'images', 'proposal'));
+
     }
 
-    public function owner_new_project (){
+    public function all_owner_project()
+    {
         $user = $this->userService->getUserById(auth()->id());
-        $active = 2 ;
+        $projects = $this->projectService->getOwnerProject($user->id);
+        $active = 4;
+        return view('owner.all_project', compact('active', 'user', 'projects'));
+    }
+
+    public function owner_new_project()
+    {
+        $user = $this->userService->getUserById(auth()->id());
+        $active = 2;
         $categories = $this->categoryService->getAllCategory();
-        return view('owner.new_project',compact('active','user','categories'));
+        return view('owner.new_project', compact('active', 'user', 'categories'));
     }
 
-    public function owner_store_project (Request $request){
+    public function owner_store_project(Request $request)
+    {
         $data = $request->all();
         unset($data['file']);
-        $data['owner_id']=auth()->id();
+        $data['owner_id'] = auth()->id();
         $date = Carbon::parse($request->deadline)->timestamp;
-        $data['deadline'] = date('Y-m-d H:i:s',$date);
-        $data['net_price'] = $this->calculate_net_price($data['category_id'],$data['size']);
-        $data['total_price'] = (int)$this->calculate_total_price($data['category_id'],$data['net_price']);
+        $data['deadline'] = date('Y-m-d H:i:s', $date);
+        $data['net_price'] = $this->calculate_net_price($data['category_id'], $data['size']);
+        $data['total_price'] = (int)$this->calculate_total_price($data['category_id'], $data['net_price']);
         $project = $this->projectService->createProject($data);
 
-        if (isset($request->file)){
-            $image['media_path'] =$this->mediaService->uploadMedia($request->file);
-            $image['type'] ='project';
+        if (isset($request->file)) {
+            $image['media_path'] = $this->mediaService->uploadMedia($request->file);
+            $image['type'] = 'project';
             $image['owner_id'] = $project->id;
-            $this->mediaService->createMedia ($image);
+            $this->mediaService->createMedia($image);
         }
 
-        return redirect("owner/project/".$project->id."/invoice");
+        return redirect("owner/project/" . $project->id . "/invoice");
     }
 
-    public function owner_active_project (){
+    public function owner_active_project()
+    {
         $user = $this->userService->getUserById(auth()->id());
-        $projects = $this->projectService->getOwnerActiveProject ($user->id);
-        $active = 3 ;
-
-        return view('owner.active_project',compact('active','user','projects'));
+        $projects = $this->projectService->getOwnerActiveProject($user->id);
+        $active = 3;
+        return view('owner.active_project', compact('active', 'user', 'projects'));
     }
 
-    public function view_project_proposal (){
+    public function view_project_proposal()
+    {
         $user = $this->userService->getUserById(auth()->id());
-        return view('owner.project_proposal',compact('user'));
+        return view('owner.project_proposal', compact('user'));
     }
 
-    public function view_project_invoice ($id){
-        $project = $this->projectService->getProject ($id);
+    public function view_project_invoice($id)
+    {
+        $project = $this->projectService->getProject($id);
         $user = $this->userService->getUserById(auth()->id());
-        return view('owner.invoice',compact('project','user'));
+        return view('owner.invoice', compact('project', 'user'));
     }
 
-    public function calculate_net_price ($category_id,$size){
+    public function calculate_net_price($category_id, $size)
+    {
         $category = $this->categoryService->getCategoryById($category_id);
-        $q = (int)round($size/($category->size));
+        $q = (int)round($size / ($category->size));
         return $q * $category->price;
     }
 
-    public function calculate_total_price ($category_id,$net_price){
+    public function calculate_total_price($category_id, $net_price)
+    {
         $category = $this->categoryService->getCategoryById($category_id);
-        return $net_price* (1+($category->commission/100));
+        return $net_price * (1 + ($category->commission / 100));
     }
 
-    public function owner_pay_project ($project_id){
-        $this->projectService->changeStatus($project_id,2);
-        return redirect('owner/project/'.$project_id.'/view');
+    public function owner_pay_project($project_id)
+    {
+        $this->projectService->changeStatus($project_id, 2);
+        return redirect('owner/project/' . $project_id . '/view');
     }
 
-    public function owner_view_project ($id){
+    public function owner_view_project($id)
+    {
         $user = $this->userService->getUserById(auth()->id());
         $project = $this->projectService->getProject($id);
-        $active = 4 ;
-        $images = $this->mediaService->getImagesOfProject ($project->id);
-        return view('owner.owner_project',compact('active','user','project','images'));
+        $active = 4;
+        $images = $this->mediaService->getImagesOfProject($project->id);
+        $proposals = $this->proposalService->getAllProposalsOfProject($project->id);
+        return view('owner.owner_project', compact('active', 'user', 'project', 'images','proposals'));
     }
 
-    public function owner_edit_project ($id){
+    public function owner_edit_project($id)
+    {
         $project = $this->projectService->getProject($id);
         $user = $this->userService->getUserById(auth()->id());
-        $active = 2 ;
+        $active = 3;
         $categories = $this->categoryService->getAllCategory();
-        return view('owner.new_project',compact('active','user','categories','project'));
+        return view('owner.new_project', compact('active', 'user', 'categories', 'project'));
+    }
+
+    public function owner_update_project(Request $request, $id)
+    {
+        if (isset($request->file)) {
+            $image['media_path'] = $this->mediaService->uploadMedia($request->file);
+            $image['type'] = 'project';
+            $image['owner_id'] = $id;
+            $this->mediaService->createMedia($image);
+        }
+        $data = $request->all();
+        unset($data['file']);
+        $date = Carbon::parse($request->deadline)->timestamp;
+        $data['deadline'] = date('Y-m-d H:i:s', $date);
+        if (isset($data['country']) && $data['country'] == null) {
+            unset($data['country']);
+        }
+        $this->projectService->updateOwnerProject($data, $id);
+
+
+        return redirect("owner/project/" . $id . "/view");
+
     }
 
 }

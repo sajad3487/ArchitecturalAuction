@@ -4,6 +4,7 @@ namespace Modules\Project\Entities;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Category\Entities\category;
 use Modules\Media\Entities\media;
 
 class project extends Model
@@ -39,7 +40,7 @@ class project extends Model
     }
 
     public function category (){
-        return $this->hasOne(User::class,'id','category_id');
+        return $this->hasOne(category::class,'id','category_id');
     }
 
     public function image (){

@@ -32,12 +32,30 @@ class ProjectRepository extends Repository
             ->update(['status'=>$status]);
     }
 
-    public function getallActiveProject ($owner_id){
+    public function getallOwenerActiveProject ($owner_id){
         return Project::where ('owner_id',$owner_id)
             ->where('status',2)
             ->with('project_image')
             ->get();
     }
+
+    public function getAllOwnerProject ($owner_id){
+        return Project::where ('owner_id',$owner_id)
+            ->with('project_image')
+            ->get();
+    }
+
+    public function getAllActiveProject (){
+        return Project::where('status',2)
+            ->where('deadline','>',now())
+            ->with('project_image')
+            ->with('category')
+            ->get();
+    }
+
+//    public function getDesignerSentProposalProject ($user_id){
+//        return Project::where('')
+//    }
 
 
 

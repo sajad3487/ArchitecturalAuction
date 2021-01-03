@@ -25,4 +25,11 @@ class MediaRepository extends Repository
             ->get();
     }
 
+    public function getDesignerProposalFile ($proposal_id){
+        return media::where ('type','proposal')
+            ->where('owner_id',$proposal_id)
+            ->get();
+
+    }
+
 }

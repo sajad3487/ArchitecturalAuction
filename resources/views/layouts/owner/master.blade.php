@@ -41,8 +41,9 @@
     <style>
         .pcounter {
             text-align: center;
-            font-size: 25px;
+            font-size: 20px;
             margin-top: 0px;
+            color: limegreen;
         }
     </style>
 
@@ -238,6 +239,7 @@
 <script src="{{asset('js/pages/widgets.js')}}"></script>
 <script src="{{asset('js/pages/custom/wizard/wizard-3.js')}}"></script>
 <script src="{{asset('js/pages/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
 
 <!--end::Page Scripts-->
 </body>

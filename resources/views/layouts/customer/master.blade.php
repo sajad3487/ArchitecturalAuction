@@ -38,6 +38,15 @@
     <link href="{{asset('css/pages/wizard/wizard-3.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/comment.css')}}" rel="stylesheet" type="text/css"/>
 
+    <style>
+        .pcounter {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 0px;
+            color: limegreen;
+        }
+
+    </style>
 
 </head>
 <!--end::Head-->
@@ -213,7 +222,45 @@
     };
 </script>
 <!--end::Global Config-->
+{{--<script>--}}
 
+
+{{--    // Class definition--}}
+{{--    var KTFormRepeater = function() {--}}
+
+{{--        // Private functions--}}
+{{--        var demo1 = function() {--}}
+{{--            $('#kt_repeater_1').repeater({--}}
+{{--                initEmpty: false,--}}
+
+{{--                defaultValues: {--}}
+{{--                    'text-input': 'foo'--}}
+{{--                },--}}
+
+{{--                show: function () {--}}
+{{--                    $(this).slideDown();--}}
+{{--                },--}}
+
+{{--                hide: function (deleteElement) {--}}
+{{--                    $(this).slideUp(deleteElement);--}}
+{{--                }--}}
+{{--            });--}}
+{{--        }--}}
+
+{{--        return {--}}
+{{--            // public functions--}}
+{{--            init: function() {--}}
+{{--                demo1();--}}
+{{--            }--}}
+{{--        };--}}
+{{--    }();--}}
+
+{{--    jQuery(document).ready(function() {--}}
+{{--        KTFormRepeater.init();--}}
+{{--    });--}}
+
+
+{{--</script>--}}
 <!--begin::Global Theme Bundle(used by all pages)-->
 <script src="{{asset('plugins/global/plugins.bundle.js')}}"></script>
 <script src="{{asset('plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
@@ -231,6 +278,8 @@
 <script src="{{asset('js/pages/widgets.js')}}"></script>
 <script src="{{asset('js/pages/custom/wizard/wizard-3.js')}}"></script>
 <!--end::Page Scripts-->
+{{--<script src="{{asset('js/pages/crud/forms/widgets/form-repeater.js')}}"></script>--}}
+
 </body>
 <!--end::Body-->
 </html>

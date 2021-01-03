@@ -2,79 +2,87 @@
 
 namespace Modules\Project\Http\Controllers;
 
+use App\Http\Services\UserService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Media\Http\Service\MediaService;
+use Modules\Project\Http\Service\ProjectService;
+use Modules\Project\Http\Service\ProposalService;
 
 class ProposalController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * @var ProjectService
      */
-    public function index()
+    private $projectService;
+    /**
+     * @var UserService
+     */
+    private $userService;
+    /**
+     * @var MediaService
+     */
+    private $mediaService;
+    /**
+     * @var ProposalService
+     */
+    private $proposalService;
+
+    public function __construct(
+        ProjectService $projectService,
+        UserService $userService,
+        MediaService $mediaService,
+        ProposalService $proposalService
+    )
     {
-        $active = 2 ;
-        return view('customer.sent_proposal',compact('active'));
+        $this->projectService = $projectService;
+        $this->userService = $userService;
+        $this->mediaService = $mediaService;
+        $this->proposalService = $proposalService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function designer_create_proposal($project_id)
     {
-        return view('project::create');
+        $project = $this->projectService->getProject($project_id);
+        $user = $this->userService->getUserById(auth()->id());
+        $active = 2;
+        $proposal = $this->proposalService->getProposalForDesigner($project_id, $user->id);
+        if ($proposal != null) {
+            $files = $this->mediaService->getFilesOfProposalForDesigner($proposal->id);
+            return view('customer.proposal', compact('project', 'user', 'active', 'proposal', 'files'));
+        }
+        return view('customer.proposal', compact('project', 'user', 'active'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
+    public function designer_store_proposal(Request $request)
     {
-
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+        unset($data['file']);
+        $proposal = $this->proposalService->createProposal($data);
+        foreach ($request->file as $key => $result) {
+            $image['media_path'] = $this->mediaService->uploadMedia($result);
+            $image['type'] = 'proposal';
+            $image['owner_id'] = $proposal->id;
+            $this->mediaService->createMedia($image);
+        }
+        return back();
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function designer_add_file_proposal(Request $request, $proposal_id)
     {
-        return view('owner.owner_proposal');
+        $image['media_path'] = $this->mediaService->uploadMedia($request->file);
+        $image['type'] = 'proposal';
+        $image['owner_id'] = $proposal_id;
+        $this->mediaService->createMedia($image);
+        return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('project::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+    public function designer_proposal (){
+        $user = $this->userService->getUserById(auth()->id());
+        $projects = $this->projectService->designerSentProposalProject($user->id);
+        $active = 2;
+        return view('customer.sent_proposal',compact('active','user','projects'));
     }
 }

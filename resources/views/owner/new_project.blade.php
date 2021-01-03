@@ -49,7 +49,18 @@
                 <div class="card card-custom">
                     <div class="card-body p-0">
 
-                        <form class="form" action="{{url("owner/project/store")}}" method="post" enctype="multipart/form-data">
+                        <form class="form" action="
+                            @if(isset($project))
+                            {{url("owner/project/$project->id/update")}}
+                            @else
+                            {{url("owner/project/store")}}
+                            @endif
+                            " method="post" enctype="multipart/form-data">
+
+                            @if(isset($project))
+                                @method('PUT')
+                            @endif
+
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">

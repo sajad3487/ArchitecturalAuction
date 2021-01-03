@@ -17,7 +17,7 @@
                             <div class="card-body rounded p-0 d-flex bg-light justify-content-between">
                                 <div
                                     class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-650px py-10 py-md-6 px-6 px-md-20 pr-lg-0">
-                                    <h1 class="font-weight-bolder text-dark mb-3">Active Project</h1>
+                                    <h1 class="font-weight-bolder text-dark m-0">Active Project</h1>
                                 {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
 
                                 </div>
@@ -41,7 +41,7 @@
             <!--begin::Container-->
             <div class=" container ">
                 <!--begin::Row-->
-                <div class="row">
+                <div class="row mt-4">
                     @foreach($projects as $key=>$project)
                     <div class="col-md-4">
                         <!--begin::Nav Panel Widget 4-->
@@ -59,7 +59,7 @@
                                             <!--end::Image-->
                                             <!--begin::Title-->
                                             <a href="{{url("owner/project/$project->id/view")}}" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                                <h1>{{$project->title ?? ''}}</h1>
+                                                <h3>{{$project->title ?? ''}}</h3>
                                             </a>
                                             <!--end::Title-->
 
@@ -87,13 +87,16 @@
                                                     var minutes{{$key}} = Math.floor((distance{{$key}} % (1000 * 60 * 60)) / (1000 * 60));
                                                     var seconds{{$key}} = Math.floor((distance{{$key}} % (1000 * 60)) / 1000);
                                                     // Output the result in an element with id="demo"
-                                                    document.getElementById('demo-{{$key}}').innerHTML = days{{$key}} + "d " + hours{{$key}} + "h "
-                                                        + minutes{{$key}} + "m " + seconds{{$key}} + "s ";
+
 
                                                     // If the count down is over, write some text
                                                     if (distance{{$key}} < 0) {
-                                                        clearInterval(x);
                                                         document.getElementById('demo-{{$key}}').innerHTML = "EXPIRED";
+                                                        document.getElementById('demo-{{$key}}').style.color = "red";
+                                                        clearInterval(x);
+                                                    }else{
+                                                        document.getElementById('demo-{{$key}}').innerHTML = days{{$key}} + "d " + hours{{$key}} + "h "
+                                                            + minutes{{$key}} + "m " + seconds{{$key}} + "s ";
                                                     }
                                                 }, 1000);
                                             </script>
@@ -103,10 +106,10 @@
                                     <!--eng::Container-->
 
                                     <!--begin::Footer-->
-                                    <div class="d-flex flex-center mt-md-5" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-                                        <h3 class="col-6 px-0">Price : {{$project->net_price ?? ''}} $</h3>
+                                    <div class="d-flex flex-center mt-md-1" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="" data-placement="right" data-original-title="">
+                                        <h6 class="col-6 px-0">Price : {{$project->net_price ?? ''}} $</h6>
 
-                                        <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14" data-toggle="modal" data-target="#kt_chat_modal">View</button>
+                                        <a href="{{url("owner/project/$project->id/view")}}" class="btn btn-outline-primary font-weight-bolder font-size-sm py-3 px-14">View</a>
                                     </div>
                                     <!--end::Footer-->
                                 </div>

@@ -40,4 +40,8 @@ class MediaService
         return $this->mediaRepository->delete($id);
     }
 
+    public function getFilesOfProposalForDesigner ($proposal_id){
+        return $this->mediaRepository->getDesignerProposalFile ($proposal_id);
+    }
+
 }

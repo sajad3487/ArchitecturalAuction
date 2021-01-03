@@ -98,6 +98,25 @@
                                     </a>
                                 </li>
                                 <!--end::Item-->
+
+                                <!--begin::Item-->
+                                <li class="nav-item mr-3">
+                                    <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_4">
+                                        <span class="nav-icon"><span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3"/>
+                                                <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000"/>
+                                                <rect fill="#000000" opacity="0.3" x="7" y="10" width="5" height="2" rx="1"/>
+                                                <rect fill="#000000" opacity="0.3" x="7" y="14" width="9" height="2" rx="1"/>
+                                            </g>
+                                        </svg><!--end::Svg Icon-->
+                                            </span>
+                                        </span>
+                                        <span class="nav-text font-size-lg">Proposals</span>
+                                    </a>
+                                </li>
+                                <!--end::Item-->
                             </ul>
                         </div>
                         <!--end::Toolbar-->
@@ -105,10 +124,10 @@
                     <!--end::Card header-->
 
                     <!--begin::Card body-->
-                    <div class="card-body px-0">
+                    <div class="card-body p-0">
                             <div class="tab-content ">
                                 <!--begin::Tab-->
-                                <div class="tab-pane show active px-7" id="kt_user_edit_tab_1" role="tabpanel">
+                                <div class="tab-pane show active p-7" id="kt_user_edit_tab_1" role="tabpanel">
                                     <div class="pb-5 px-5">
                                         <div class="row">
                                             <div class="col-md-8">
@@ -119,7 +138,11 @@
                                                 <h1 class="text-success">{{$project->net_price ?? ''}} $</h1>
                                                 <h4>Price</h4>
                                             </div>
-                                            <a href="{{url("owner/project/$project->id/edit")}}" class="btn btn-warning h-40px mr-2 w-100px mt-md-2">Edit Project</a>
+                                            @if($project->deadline > now())
+                                            <a href="{{url("owner/project/$project->id/edit")}}" class="btn btn-outline-warning h-40px mr-2 w-100px mt-md-2" disabled>Edit Project</a>
+                                            @else
+                                            <button  class="btn btn-outline-warning h-40px mr-2 w-100px mt-md-2"  disabled>Edit Project</button>
+                                                @endif
                                         </div>
                                         <div class="row mt-10 ">
                                             <div class="col-12">
@@ -135,12 +158,8 @@
                                         </div>
                                         <div class="row mt-5">
                                             <div class="col-12">
-                                                <h6>Details:</h6>
-                                                <ul>
-                                                    <li>Item 1</li>
-                                                    <li>Item 2</li>
-                                                    <li>Item 3</li>
-                                                </ul>
+                                                <h6>Address:</h6>
+                                                <p>{{$project->address ?? ''}}</p>
                                             </div>
                                         </div>
                                         <div class="row mt-5">
@@ -158,7 +177,7 @@
                                 <!--end::Tab-->
 
 {{--                                <!--begin::Tab-->--}}
-                                <div class="tab-pane px-7" id="kt_user_edit_tab_2" role="tabpanel">
+                                <div class="tab-pane p-7" id="kt_user_edit_tab_2" role="tabpanel">
                                             <!--begin::Form-->
                                             <div class="px-15">
 
@@ -208,28 +227,7 @@
                                 <!--end::Tab-->
 
                                 <!--begin::Tab-->
-                                <div class="tab-pane px-7" id="kt_user_edit_tab_2" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card card-custom overlay">
-                                                <div class="card-body p-0">
-                                                    <div class="overlay-wrapper">
-                                                        <img src="{{asset('media/project/project-1.jpg')}}" alt="" class="w-100 rounded"/>
-                                                    </div>
-                                                    <div class="overlay-layer">
-                                                        <a href="#" class="btn font-weight-bold btn-primary btn-shadow" >Explore</a>
-                                                        <a href="#" class="btn font-weight-bold btn-light-primary btn-shadow ml-2">Purchase</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <!--end::Tab-->
-
-                                <!--begin::Tab-->
-                                <div class="tab-pane px-7" id="kt_user_edit_tab_3" role="tabpanel">
+                                <div class="tab-pane p-7" id="kt_user_edit_tab_3" role="tabpanel">
                                     <!--begin::Body-->
                                     <div class="card-body pt-0">
                                         <!--begin::Row-->
@@ -302,6 +300,55 @@
 {{--                                    </div>--}}
                                     <!--end::Footer-->
 
+                                </div>
+                                <!--end::Tab-->
+
+                                <!--begin::Tab-->
+                                <div class="tab-pane px-7 pb-5" id="kt_user_edit_tab_4" role="tabpanel">
+                                    <div class="row">
+                                        <div class=" mt-2 overflow-auto px-5 w-100">
+                                            <!--begin: Datatable-->
+                                            <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                                                <thead class="text-center border-bottom">
+                                                <tr>
+                                                    <th title="Field #1">Proposal ID</th>
+                                                    <th title="Field #2">Designer ID</th>
+                                                    <th title="Field #3">Title</th>
+                                                    <th title="Field #4">Description</th>
+                                                    <th title="Field #5">Files</th>
+                                                    <th title="Field #6">Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody >
+
+                                                @foreach($proposals as $proposal)
+                                                        <tr  class="text-center">
+                                                            <td>{{$proposal->id ?? ''}}</td>
+                                                            <td>{{$proposal->user_id ?? ''}}</td>
+                                                            <td>{{$proposal->title ?? ''}}</td>
+                                                            <td>{{$proposal->description ?? ''}}</td>
+
+                                                            <td>
+                                                                @foreach($proposal->proposal_file as $files)
+                                                                <a href="{{$files->media_path ?? ''}}" class="btn btn-outline-success p-1 m-1 pl-2" download><i class="flaticon-download"></i></a>
+                                                                @endforeach
+                                                            </td>
+                                                            <td><a href="" class="btn btn-outline-warning">Make him Winner</a></td>
+                                                        </tr>
+
+
+                                                        @endforeach
+
+                                                </tbody>
+
+                                            </table>
+                                            <!--end: Datatable-->
+
+
+
+                                        </div>
+
+                                    </div>
                                 </div>
                                 <!--end::Tab-->
 
