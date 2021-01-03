@@ -194,42 +194,50 @@
                                     <div class="row">
                                         <div class="user-comment">
                                             <div class="comments-section pt-0 border-0">
-                                                <div class="comment-post">
-                                                    <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"/></div>
-                                                    <div class="comment-details">
-                                                        <p><span class="comment-author">Owner</span><span class="comment-time"></span></p>
-                                                        <p class="comment-content">Maecenas eu maximus tellus, vel placerat massa. Nullam neque magna, hendrerit ac lacinia in, consequat nec ipsum. Vivamus tincidunt fringilla diam et sagittis. Suspendisse tincidunt hendrerit nisi, sit amet aliquet enim ornare at.</p>
-                                                        <div class="comment-like-unlike">
-                                                            <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-                                                            <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
-                                                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                                                @foreach($walls as $wall)
+                                                    <div class="comment-post">
+                                                        <div class="comment-img"><img src="{{asset('media/icon/designer.png')}}"/></div>
+                                                        <div class="comment-details">
+                                                            <p><span class="comment-author">@if($wall->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@else Designer No: {{$wall->user_id ?? ''}}@endif</span><span class="comment-time"></span></p>
+                                                            <p class="comment-content">{{$wall->text ?? ''}}</p>
+                                                            <div class="comment-like-unlike">
+                                                                <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+                                                                <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="comment-post-reply">
-                                                    <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"/></div>
-                                                    <div class="comment-details">
-                                                        <p><span class="comment-author">Designer</span><span class="comment-time"></span></p>
-                                                        <p class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                                                        <div class="comment-like-unlike">
-                                                            <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-                                                            <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
-                                                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                                                    @foreach($wall->answer as $answer)
+
+                                                        <div class="comment-post-reply">
+                                                            <div class="comment-img"><img src="{{asset('media/icon/owner.png')}}"/></div>
+                                                            <div class="comment-details">
+                                                                <p><span class="comment-author">@if($answer->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@else @if($answer->user->user_type == 1)Designer No :{{$answer->user_id ?? ''}}@else Owner @endif @endif</span><span class="comment-time"></span></p>
+                                                                <p class="comment-content">{{$answer->text ?? ''}} </p>
+                                                                <div class="comment-like-unlike">
+                                                                    <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                                                                    <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+                                                                    <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="comment-post">
-                                                    <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"/></div>
-                                                    <div class="comment-details">
-                                                        <p><span class="comment-author">Owner</span><span class="comment-time"></span></p>
-                                                        <p class="comment-content">Nullam neque magna, hendrerit ac lacinia in, consequat nec ipsum. Vivamus tincidunt fringilla diam et sagittis. Suspendisse tincidunt hendrerit nisi, sit amet aliquet enim ornare at.</p>
-                                                        <div class="comment-like-unlike">
-                                                            <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-                                                            <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
-                                                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+
+                                                        @endforeach
+
+                                                    @endforeach
+{{--                                                <div class="comment-post">--}}
+{{--                                                    <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"/></div>--}}
+{{--                                                    <div class="comment-details">--}}
+{{--                                                        <p><span class="comment-author">Owner</span><span class="comment-time"></span></p>--}}
+{{--                                                        <p class="comment-content">Nullam neque magna, hendrerit ac lacinia in, consequat nec ipsum. Vivamus tincidunt fringilla diam et sagittis. Suspendisse tincidunt hendrerit nisi, sit amet aliquet enim ornare at.</p>--}}
+{{--                                                        <div class="comment-like-unlike">--}}
+{{--                                                            <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>--}}
+{{--                                                            <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>--}}
+{{--                                                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                                 <div class="comment-add">
                                                     <form action="{{url("designer/wall/store")}}" method="post">
                                                         @csrf

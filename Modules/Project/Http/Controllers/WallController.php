@@ -23,7 +23,8 @@ class WallController extends Controller
 
     public function designer_store_question (Request $request){
         $data = $request->all();
-        dd($data);
         $data['user_id']=auth()->id();
+        $this->wallService->createWallQuestion ($data);
+        return back();
     }
 }

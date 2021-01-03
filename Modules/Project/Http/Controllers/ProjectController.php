@@ -11,6 +11,7 @@ use Modules\Category\Http\Service\CategoryService;
 use Modules\Media\Http\Service\MediaService;
 use Modules\Project\Http\Service\ProjectService;
 use Modules\Project\Http\Service\ProposalService;
+use Modules\Project\Http\Service\WallService;
 
 class ProjectController extends Controller
 {
@@ -34,13 +35,18 @@ class ProjectController extends Controller
      * @var ProposalService
      */
     private $proposalService;
+    /**
+     * @var WallService
+     */
+    private $wallService;
 
     public function __construct(
         UserService $userService,
         CategoryService $categoryService,
         ProjectService $projectService,
         MediaService $mediaService,
-        ProposalService $proposalService
+        ProposalService $proposalService,
+        WallService $wallService
     )
     {
         $this->userService = $userService;
@@ -48,6 +54,7 @@ class ProjectController extends Controller
         $this->projectService = $projectService;
         $this->mediaService = $mediaService;
         $this->proposalService = $proposalService;
+        $this->wallService = $wallService;
     }
 
     public function designer_won_project()
@@ -69,8 +76,8 @@ class ProjectController extends Controller
         $active = 1;
         $images = $this->mediaService->getImagesOfProject($project->id);
         $proposal = $this->proposalService->getProposalForDesigner($project_id, auth()->id());
-        return view('customer.designer_project', compact('user', 'active', 'project', 'images', 'proposal'));
-
+        $walls = $this->wallService->getWallOfProject($project_id);
+        return view('customer.designer_project', compact('user', 'active', 'project', 'images', 'proposal','walls'));
     }
 
     public function all_owner_project()
