@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\customerSearchProduct;
-use App\Http\Requests\ProfileRequest;
 use App\Http\Services\UserService;
-use Modules\Category\Http\Services\CategoryService;
-use Modules\Order\Http\Services\OrderService;
-use Modules\Product\Http\Services\ProductService;
+use Illuminate\Http\Request;
+use Modules\Category\Http\Service\CategoryService;
+use Modules\Media\Http\Service\MediaService;
 use Modules\Project\Http\Service\ProjectService;
 
 class HomeController extends Controller
@@ -20,15 +18,27 @@ class HomeController extends Controller
      * @var ProjectService
      */
     private $userService;
+    /**
+     * @var MediaService
+     */
+    private $mediaService;
+    /**
+     * @var CategoryService
+     */
+    private $categoryService;
 
     public function __construct(
         ProjectService $projectService,
-        UserService $userService
+        UserService $userService,
+        MediaService $mediaService,
+        CategoryService $categoryService
     )
     {
         $this->middleware('auth');
         $this->projectService = $projectService;
         $this->userService = $userService;
+        $this->mediaService = $mediaService;
+        $this->categoryService = $categoryService;
     }
 
     public function index(){
@@ -45,26 +55,39 @@ class HomeController extends Controller
         $user = $this->userService->getUserById(auth()->id());
         $projects = $this->projectService->allActiveProject();
         $active = 1;
-        return view('customer.index',compact('active','user','projects'));
+        $categories = $this->categoryService->getAllCategory();
+        return view('customer.index',compact('active','user','projects','categories'));
     }
 
     public function designer_profile (){
-        $customer = auth()->user();
+        $user = auth()->user();
         $active = 4;
-        return view('customer.profile',compact('customer','active'));
+        return view('customer.profile',compact('user','active'));
     }
 
     public function owner_index (){
         $user = $this->userService->getUserById(auth()->id());
         $projects = $this->projectService->getOwnerActiveProject ($user->id);
         $active = 1;
-        return view('owner.index',compact('active','user','projects'));
+        $categories = $this->categoryService->getAllCategory();
+        return view('owner.index',compact('active','user','projects','categories'));
     }
 
     public function owner_profile (){
-        $customer = auth()->user();
+        $user = auth()->user();
         $active = 5;
-        return view('owner.profile',compact('customer','active'));
+        return view('owner.profile',compact('user','active'));
+    }
+
+    public function updateProfile (Request $request){
+        $data = $request->all();
+        $user_id = auth()->id();
+        unset($data['file']);
+        if (isset($request->file)){
+            $data['profile_picture'] = $this->mediaService->uploadMedia($request->file);
+        }
+        $this->userService->updateUser($data,$user_id);
+        return back();
     }
 
 

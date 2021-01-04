@@ -252,35 +252,38 @@
 
 
                                             </div>
-                                            <div>
-                                                <form action="{{url("designer/proposal/$proposal->id/add_file")}}" method="post" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="form-group row m-0" id="kt_repeater_1">
-                                                        <div data-repeater-list="" class="col-lg-10 p-0">
-                                                            <div data-repeater-item class="form-group row align-items-center m-0">
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>File Browser</label>
-                                                                        <div></div>
-                                                                        <div class="custom-file">
-                                                                            <input type="file" name="file" class="custom-file-input" id="file_input_0"/>
-                                                                            <label class="custom-file-label" for="file_input_0">Choose file</label>
+                                            @if($project->deadline >now() && $project->designer_id == null)
+                                                <div>
+                                                    <form action="{{url("designer/proposal/$proposal->id/add_file")}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="form-group row m-0" id="kt_repeater_1">
+                                                            <div data-repeater-list="" class="col-lg-10 p-0">
+                                                                <div data-repeater-item class="form-group row align-items-center m-0">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>File Browser</label>
+                                                                            <div></div>
+                                                                            <div class="custom-file">
+                                                                                <input type="file" name="file" class="custom-file-input" id="file_input_0"/>
+                                                                                <label class="custom-file-label" for="file_input_0">Choose file</label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                    </div>
-                                                    <div class="form-group row m-0">
-                                                        <div class="col-lg-4">
-                                                            <button type="submit" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-success w-100px">
-                                                                <i class="la la-plus"></i>Save
-                                                            </button>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                        <div class="form-group row m-0">
+                                                            <div class="col-lg-4">
+                                                                <button type="submit" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-success w-100px">
+                                                                    <i class="la la-plus"></i>Save
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                @endif
                                         </div>
                                     </div>
                                 </div>

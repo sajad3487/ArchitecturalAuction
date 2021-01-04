@@ -1,18 +1,5 @@
 <?php
 
-Route::group(['prefix'=>'designer'],function (){
-    Route::group(['prefix'=>'project'],function (){
-
-        Route::get('/','ProjectController@designer_project');
-        Route::get('/won','ProjectController@designer_won_project');
-
-    });
-
-    Route::group(['prefix'=>'proposal'],function (){
-        Route::get('/','ProposalController@index');
-    });
-
-});
 
 
 Route::group(['prefix'=>'owner'],function (){
@@ -27,6 +14,12 @@ Route::group(['prefix'=>'owner'],function (){
         Route::get('/{project_id}/view','ProjectController@owner_view_project');
         Route::get('/{project_id}/edit','ProjectController@owner_edit_project');
         Route::put('/{project_id}/update','ProjectController@owner_update_project');
+        Route::put('/{project_id}/make_winner','ProjectController@owner_make_winner');
+
+        Route::get('/search','ProjectController@searchOwnerProject');
+
+        Route::get('{category_id}/get_category','ProjectController@owner_category');
+
     });
 
     Route::group(['prefix'=>'proposal'],function (){
@@ -34,12 +27,19 @@ Route::group(['prefix'=>'owner'],function (){
         Route::get('/{project_id}/view','ProposalController@show');
     });
 
+
+
 });
 
 Route::group(['prefix'=>'designer'],function () {
     Route::group(['prefix' => 'project'], function () {
 
         Route::get('/{project_id}/view','ProjectController@designer_view_project');
+        Route::get('/won','ProjectController@designer_won_project');
+
+        Route::get('/search','ProjectController@searchDesignerProject');
+
+        Route::get('{category_id}/get_category','ProjectController@designer_category');
 
     });
 

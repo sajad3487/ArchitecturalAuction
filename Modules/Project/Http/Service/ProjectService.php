@@ -62,4 +62,24 @@ class ProjectService
         return $projects;
     }
 
+    public function designerWonProject ($user_id){
+        return $this->projectRepository->getDesignerWonProject ($user_id);
+    }
+
+    public function searchDesigner ($data){
+        return $this->projectRepository->searchDesignerProject($data);
+    }
+
+    public function searchOwner ($data,$user_id){
+        return $this->projectRepository->searchOwnerProject($data,$user_id);
+    }
+
+    public function getProjectOfCategory ($category_id){
+        return $this->projectRepository->getAllProjectsOfCategory ($category_id);
+    }
+
+    public function getOwnerCategoryProject ($category_id,$user_id){
+        return $this->projectRepository->getAllOwnerCategoryProject ($category_id,$user_id);
+    }
+
 }

@@ -5,6 +5,7 @@ namespace Modules\Project\Repository;
 
 
 use App\DesignPatterns\Repository;
+use Modules\Project\Entities\project;
 use Modules\Project\Entities\proposal;
 
 class ProposalRepository extends Repository
@@ -36,5 +37,6 @@ class ProposalRepository extends Repository
             ->with('proposal_file')
             ->get();
     }
+
 
 }

@@ -39,8 +39,12 @@
                     <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                     <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{$user->name ?? ''}}</span>
                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                                            <span class="symbol-label font-size-h5 font-weight-bold">S</span>
-                                        </span>
+                        @if($user->profile_picture == null)
+                            <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+                        @else
+                            <img style="width: 45px" src="{{$user->profile_picture}}" alt="">
+                        @endif
+                     </span>
                 </div>
             </div>
             <!--end::User-->

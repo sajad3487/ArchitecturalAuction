@@ -70,7 +70,7 @@
 
                                                     <!--begin::Text-->
                                                     {{--                                            <div class="font-weight-bold text-dark-50 font-size-sm pb-7"></div>--}}
-                                                    <input type="text" class="d-none" id="deadline-{{$key}}" value="{{$project->deadline}}">
+                                                    <input type="text" class="d-none" id="deadline-{{$key}}" value="{{$project->deadline ?? ''}}">
                                                     <!--end::Text-->
                                                     <p class="pcounter p-0 m-0" id="demo-{{$key}}"></p>
 

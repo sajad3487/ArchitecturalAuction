@@ -71,7 +71,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Category</label>
-                                            <select class="form-control form-control-solid" name="category_id">
+                                            <select class="form-control form-control-solid" @if(isset($project)) disabled @endif name="category_id">
                                                 <option>Please select your category</option>
                                                 @foreach($categories as $category)
                                                 <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">{{$category->title ?? ''}}</option>
@@ -600,7 +600,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Size (m2)</label>
-                                            <input type="number" value="{{old('size') ?? $project->size ?? ''}}" name="size" class="form-control form-control-solid" placeholder="Project size"/>
+                                            <input type="number" value="{{old('size') ?? $project->size ?? ''}}" @if(isset($project)) disabled @endif name="size" class="form-control form-control-solid" placeholder="Project size"/>
                                         </div>
                                     </div>
                                 </div>

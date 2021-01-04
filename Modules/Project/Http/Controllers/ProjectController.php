@@ -60,13 +60,9 @@ class ProjectController extends Controller
     public function designer_won_project()
     {
         $user = $this->userService->getUserById(auth()->id());
+        $projects = $this->projectService->designerWonProject($user->id);
         $active = 3;
-        return view('customer.you_won', compact('active', 'user'));
-    }
-
-    public function designer_project()
-    {
-        return view('customer.designer_project');
+        return view('customer.you_won', compact('active', 'user','projects'));
     }
 
     public function designer_view_project($project_id)
@@ -164,7 +160,8 @@ class ProjectController extends Controller
         $active = 4;
         $images = $this->mediaService->getImagesOfProject($project->id);
         $proposals = $this->proposalService->getAllProposalsOfProject($project->id);
-        return view('owner.owner_project', compact('active', 'user', 'project', 'images','proposals'));
+        $walls = $this->wallService->getWallOfProject($id);
+        return view('owner.owner_project', compact('active', 'user', 'project', 'images','proposals','walls'));
     }
 
     public function owner_edit_project($id)
@@ -192,10 +189,44 @@ class ProjectController extends Controller
             unset($data['country']);
         }
         $this->projectService->updateOwnerProject($data, $id);
-
-
         return redirect("owner/project/" . $id . "/view");
-
     }
 
+    public function owner_make_winner (Request $request,$project_id){
+        $data=$request->all();
+        $this->projectService->updateOwnerProject($data,$project_id);
+        return back();
+    }
+
+    public function searchDesignerProject (Request $request) {
+        $data = $request->search;
+        $projects = $this->projectService->searchDesigner($data);
+        $user = $this->userService->getUserById(auth()->id());
+        $active = 1;
+        return view('customer.index',compact('active','user','projects'));
+    }
+
+    public function searchOwnerProject (Request $request){
+        $data = $request->search;
+        $user = $this->userService->getUserById(auth()->id());
+        $projects = $this->projectService->searchOwner($data,$user->id);
+        $active = 1;
+        return view('owner.index',compact('active','user','projects'));
+    }
+
+    public function designer_category ($category_id){
+        $user = $this->userService->getUserById(auth()->id());
+        $projects = $this->projectService->getProjectOfCategory($category_id);
+        $categories = $this->categoryService->getAllCategory();
+        $active = 1;
+        return view('customer.index',compact('user','projects','categories','active'));
+    }
+
+    public function owner_category ($category_id){
+        $user = $this->userService->getUserById(auth()->id());
+        $projects = $this->projectService->getOwnerCategoryProject($category_id,$user->id);
+        $categories = $this->categoryService->getAllCategory();
+        $active = 1;
+        return view('owner.index',compact('user','projects','categories','active'));
+    }
 }

@@ -20,7 +20,7 @@
                                     <h1 class="font-weight-bolder text-dark mb-3">Search Project</h1>
                                 {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
                                 <!--begin::Form-->
-                                    <form action="{{url('/search')}}" method="get" class="d-flex flex-center py-2 px-6 bg-white rounded">
+                                    <form action="{{url('/owner/project/search')}}" method="get" class="d-flex flex-center py-2 px-6 bg-white rounded">
                                         @csrf
                                                         <span class="svg-icon svg-icon-lg svg-icon-primary"><!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg--><svg
                                                                 xmlns="http://www.w3.org/2000/svg"
@@ -59,10 +59,13 @@
                         <div class="card card-custom ">
                             <div class="card-body rounded px-6 py-4 bg-light">
                                 <div class="font-size-h4 mt-2 mr-4">Categories :
-                                    <a href="{{url("/home")}}" class="btn btn-hover-light-primary mr-2">All</a>
+                                    <a href="{{url("/home")}}" class="btn btn-outline-primary mx-2">All</a>
                                     @if(isset($categories))
                                         @foreach($categories as $category)
-                                            <a href="{{url("/category/$category->id")}}" class="btn btn-hover-light-primary mr-2">{{$category->title}}</a>
+                                            <a href="{{url("/owner/project/$category->id/get_category")}}" class="btn btn-outline-primary mr-2">{{$category->title}}</a>
+                                            @foreach($category->subCategory as $subCat)
+                                                <a href="{{url("/owner/project/$subCat->id/get_category")}}" class="btn btn-hover-light-primary mr-2">{{$category->title}}</a>
+                                            @endforeach
                                         @endforeach
                                     @endif
                                 </div>

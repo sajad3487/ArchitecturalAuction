@@ -195,49 +195,72 @@
                                         <div class="user-comment">
                                             <div class="comments-section pt-0 border-0">
                                                 @foreach($walls as $wall)
-                                                    <div class="comment-post">
+                                                    <div class="comment-post my-4">
                                                         <div class="comment-img"><img src="{{asset('media/icon/designer.png')}}"/></div>
                                                         <div class="comment-details">
                                                             <p><span class="comment-author">@if($wall->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@else Designer No: {{$wall->user_id ?? ''}}@endif</span><span class="comment-time"></span></p>
                                                             <p class="comment-content">{{$wall->text ?? ''}}</p>
-                                                            <div class="comment-like-unlike">
-                                                                <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-                                                                <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
-                                                                <span><i class="fa fa-reply" aria-hidden="true"></i></span>
-                                                            </div>
+                                                            @if($wall->user_id == $user->id)
+                                                                <div class="accordion accordion-light row" id="accordionExample-{{$wall->id}}">
+                                                                    <div class="card">
+                                                                        <div class="card-header" id="headingOne2">
+                                                                            <div class="card-title" data-toggle="collapse" data-target="#collapseOne-{{$wall->id}}">
+                                                                                <i class="fa fa-reply" aria-hidden="true"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="collapseOne-{{$wall->id}}" class="collapse" data-parent="#accordionExample-{{$wall->id}}">
+                                                                            <div class="card-body">
+                                                                                <form action="{{url("designer/wall/store")}}" method="post">
+                                                                                    @csrf
+                                                                                    <div class="field-comment mb-3">
+                                                                                        <input type="number" value="{{$project->id}}" name="project_id" class="d-none">
+                                                                                        <input type="number" value="{{$wall->id}}" name="parent_id" class="d-none">
+                                                                                        <textarea rows="4" name="text" cols="50"></textarea>
+                                                                                        <button type="submit" class="btn btn--blue btn--medium pull-right">Post Your Question</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     @foreach($wall->answer as $answer)
-
-                                                        <div class="comment-post-reply">
+                                                        <div class="comment-post-reply mb-2">
                                                             <div class="comment-img"><img src="{{asset('media/icon/owner.png')}}"/></div>
                                                             <div class="comment-details">
                                                                 <p><span class="comment-author">@if($answer->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@else @if($answer->user->user_type == 1)Designer No :{{$answer->user_id ?? ''}}@else Owner @endif @endif</span><span class="comment-time"></span></p>
                                                                 <p class="comment-content">{{$answer->text ?? ''}} </p>
-                                                                <div class="comment-like-unlike">
-                                                                    <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-                                                                    <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
-                                                                    <span><i class="fa fa-reply" aria-hidden="true"></i></span>
-                                                                </div>
+                                                                @if($answer->user_id == $user->id)
+                                                                    <div class="accordion accordion-light row" id="accordionExample-{{$answer->id}}">
+                                                                        <div class="card">
+                                                                            <div class="card-header" id="headingOne2">
+                                                                                <div class="card-title" data-toggle="collapse" data-target="#collapseOne-{{$answer->id}}">
+                                                                                    <i class="fa fa-reply" aria-hidden="true"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="collapseOne-{{$answer->id}}" class="collapse" data-parent="#accordionExample-{{$answer->id}}">
+                                                                                <div class="card-body">
+                                                                                    <form action="{{url("designer/wall/store")}}" method="post">
+                                                                                        @csrf
+                                                                                        <div class="field-comment mb-3">
+                                                                                            <input type="number" value="{{$project->id}}" name="project_id" class="d-none">
+                                                                                            <input type="number" value="{{$wall->id}}" name="parent_id" class="d-none">
+                                                                                            <textarea rows="4" name="text" cols="50"></textarea>
+                                                                                            <button type="submit" class="btn btn--blue btn--medium pull-right">Post Your Question</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    @endif
                                                             </div>
                                                         </div>
-
-
-                                                        @endforeach
-
                                                     @endforeach
-{{--                                                <div class="comment-post">--}}
-{{--                                                    <div class="comment-img"><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"/></div>--}}
-{{--                                                    <div class="comment-details">--}}
-{{--                                                        <p><span class="comment-author">Owner</span><span class="comment-time"></span></p>--}}
-{{--                                                        <p class="comment-content">Nullam neque magna, hendrerit ac lacinia in, consequat nec ipsum. Vivamus tincidunt fringilla diam et sagittis. Suspendisse tincidunt hendrerit nisi, sit amet aliquet enim ornare at.</p>--}}
-{{--                                                        <div class="comment-like-unlike">--}}
-{{--                                                            <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>--}}
-{{--                                                            <span><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>--}}
-{{--                                                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
+                                                    <hr>
+                                                    @endforeach
                                                 <div class="comment-add">
                                                     <form action="{{url("designer/wall/store")}}" method="post">
                                                         @csrf
@@ -247,7 +270,6 @@
                                                             <button type="submit" class="btn btn--blue btn--medium pull-right">Post Your Question</button>
                                                         </div>
                                                     </form>
-
                                                 </div>
                                             </div>
                                         </div>

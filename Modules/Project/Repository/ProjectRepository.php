@@ -5,6 +5,7 @@ namespace Modules\Project\Repository;
 
 
 use App\DesignPatterns\Repository;
+use Modules\Product\Entities\product;
 use Modules\Project\Entities\Project;
 
 class ProjectRepository extends Repository
@@ -53,10 +54,36 @@ class ProjectRepository extends Repository
             ->get();
     }
 
-//    public function getDesignerSentProposalProject ($user_id){
-//        return Project::where('')
-//    }
+    public function getDesignerWonProject ($designer_id){
+        return project::where('designer_id',$designer_id)
+            ->with('category')
+            ->get();
+    }
 
+    public function searchDesignerProject ($data){
+        return project::where('title','like',"%{$data}%")
+            ->where('status',2)
+            ->get();
+    }
 
+    public function searchOwnerProject ($data,$user_id){
+        return project::where('title','like',"%{$data}%")
+            ->where('owner_id',$user_id)
+            ->get();
+    }
+
+    public function getAllProjectsOfCategory ($category_id){
+        return project::where('category_id',$category_id)
+            ->where('status',2)
+            ->with('category')
+            ->get();
+    }
+
+    public function getAllOwnerCategoryProject ($category_id,$user_id){
+        return project::where('owner_id',$user_id)
+            ->where('category_id',$category_id)
+            ->with('category')
+            ->get();
+    }
 
 }
