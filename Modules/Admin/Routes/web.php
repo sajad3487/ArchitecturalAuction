@@ -15,7 +15,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
             Route::get('{category_id}/subCategory','AdminCategoryController@subCategory');
         });
 
-        Route::get('/users','AdminController@users');
+        Route::get('/users','AdminController@customer');
+        Route::get('/project','AdminController@project');
 
     });
 });

@@ -20,8 +20,8 @@
                     <div class="card-header flex-wrap py-5">
                         <div class="card-title">
                             <h3 class="card-label">
-                                Customers
-                                <span class="d-block text-muted pt-2 font-size-sm">This page shows Customers info</span>
+                                Projects
+                                <span class="d-block text-muted pt-2 font-size-sm">This page shows Projects info</span>
                             </h3>
                         </div>
                         <div class="card-toolbar">
@@ -35,43 +35,33 @@
                             <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
                                 <thead>
                                 <tr>
-                                    <th>User ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Profile Pic</th>
+                                    <th>Project ID</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Deadline</th>
+                                    <th>Project image</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @foreach($customers as $customer)
+                                @foreach($projects as $project)
                                 <tr>
-                                    <td>{{$customer->id ?? ''}}</td>
-                                    <td>{{$customer->name ?? ''}} {{$customer->lname ?? ''}}</td>
-                                    <td>{{$customer->email ?? ''}}</td>
-                                    <td>{{$customer->tel ?? ''}}</td>
-                                    <td>{{$customer->address ?? ''}}</td>
+                                    <td>{{$project->id ?? ''}}</td>
+                                    <td>{{$project->title ?? ''}}</td>
+                                    <td>{{$project->description ?? ''}}</td>
+                                    <td>{{$project->category->title ?? ''}}</td>
+                                    <td>{{$project->deadline ?? ''}}</td>
                                     <td>
-                                        @if($customer->user_type == 1)
-                                            <span class="label font-weight-bold label-lg label-light-success label-inline">
-                                                Designer
-                                            </span>
-                                            @else
-                                            <span class="label font-weight-bold label-lg label-light-info label-inline">
-                                                Owner
-                                            </span>
-
-                                        @endif
-                                    </td>
-                                    <td>
-    {{--                                    {{$customer->profile_picture}}--}}
-                                        <div class="image-input image-input-outline"  id="kt_image_1">
-                                            <a href="{{asset($customer->profile_picture)}}" target="_blank"><div class="image-input-wrapper" style="background-image: url({{asset($customer->profile_picture)}}); width: 50px;height: 50px"></div></a>
+    {{--                                    {{$project->profile_picture}}--}}
+                                        @foreach($project->project_image as $key=>$image)
+                                        <div class="image-input image-input-outline"  id="kt_image_{{$key}}">
+                                            <a href="{{asset($image->media_path)}}" target="_blank"><div class="image-input-wrapper" style="background-image: url({{asset($image->media_path)}}); width: 50px;height: 50px"></div></a>
                                             <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
                                             <i class="ki ki-bold-close icon-xs text-muted"></i>
                                         </span>
                                         </div>
+                                            @endforeach
                                     </td>
 
                                 </tr>

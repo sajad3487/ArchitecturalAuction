@@ -55,8 +55,8 @@
                                             </svg><!--end::Svg Icon--></span></div>
                                             </div>
                                             <div>
-                                                <a href="{{url('/admin/products/create')}}"
-                                                   class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">New Product</a>
+                                                <a href="{{url('/admin/users')}}"
+                                                   class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Customer</a>
                                             </div>
                                         </div>
 
@@ -83,8 +83,8 @@
                                             </svg><!--end::Svg Icon--></span></div>
                                             </div>
                                             <div>
-                                                <a href="{{url('/admin/invoices/2')}}"
-                                                   class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Placed Order</a>
+                                                <a href="{{url('/admin/category')}}"
+                                                   class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Categories</a>
 
                                             </div>
                                         </div>
@@ -112,8 +112,8 @@
                                             </svg><!--end::Svg Icon--></span></div>
                                             </div>
                                             <div>
-                                                <a href="{{url('/admin/categories/create')}}"
-                                                   class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">New Category</a>
+                                                <a href="{{url('/admin/project')}}"
+                                                   class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Projects</a>
 
                                             </div>
                                         </div>
@@ -142,8 +142,8 @@
                                     <!--begin::Body-->
                                     <div class="card-body d-flex flex-column">
                                         <!--begin::Title-->
-                                        <a href="{{url('/admin/products')}}"
-                                           class="text-white text-hover-primary font-weight-bolder font-size-h3">Products</a>
+                                        <a href="{{url('/admin/project')}}"
+                                           class="text-white text-hover-primary font-weight-bolder font-size-h3">Projects</a>
                                         <!--end::Title-->
                                     </div>
                                     <!--end::Body-->
@@ -191,8 +191,8 @@
                                                 <div
                                                     class="text-inverse-success font-weight-bolder font-size-h2 mt-3"></div>
 
-                                                <a href="{{url('/admin/invoices/0')}}"
-                                                   class="text-inverse-success font-weight-bold font-size-lg mt-1">All Order</a>
+                                                <a href="{{url('/admin/project')}}"
+                                                   class="text-inverse-success font-weight-bold font-size-lg mt-1">All Projects</a>
                                             </div>
                                         </div>
                                         <!--end::Tiles Widget 11-->
@@ -219,7 +219,7 @@
 
                                                 <a href="{{url('/admin/users')}}"
                                                    class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1">All
-                                                    Customers</a>
+                                                    Users</a>
                                             </div>
                                         </div>
                                         <!--end::Tiles Widget 12-->
@@ -232,8 +232,8 @@
                                     <!--begin::Body-->
                                     <div class="card-body d-flex align-items-center">
                                         <div>
-                                            <h3 class="text-white font-weight-bolder line-height-lg mb-5">Canceled Order</h3>
-                                            <a href='{{url('admin/invoices/6')}}' class="btn btn-success font-weight-bold px-6 py-3">Show</a>
+                                            <h3 class="text-white font-weight-bolder line-height-lg mb-5">Projects</h3>
+                                            <a href='{{url('admin/project')}}' class="btn btn-success font-weight-bold px-6 py-3">Show</a>
                                         </div>
                                     </div>
                                     <!--end::Body-->
@@ -247,10 +247,10 @@
                                     <!--begin::Body-->
                                     <div class="card-body d-flex flex-column align-items-start justify-content-start">
                                         <div class="p-1 flex-grow-1">
-                                            <h3 class="text-white font-weight-bolder line-height-lg mb-5">Placed Order</h3>
+                                            <h3 class="text-white font-weight-bolder line-height-lg mb-5">Active Projects</h3>
                                         </div>
 
-                                        <a href='{{url('/admin/invoices/2')}}' class="btn btn-link btn-link-warning font-weight-bold">
+                                        <a href='{{url('/admin/project')}}' class="btn btn-link btn-link-warning font-weight-bold">
                                             Placed Order
                                             <span class="svg-icon svg-icon-lg svg-icon-warning"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
                                                     xmlns="http://www.w3.org/2000/svg"

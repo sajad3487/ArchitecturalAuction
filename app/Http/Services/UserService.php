@@ -44,4 +44,8 @@ class UserService
         return $this->userRepo->countUser();
     }
 
+    public function getAllCustomer (){
+        return $this->userRepo->getCustomers ();
+    }
+
 }

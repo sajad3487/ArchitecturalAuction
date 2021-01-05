@@ -131,8 +131,7 @@
 
                 <!--begin::Aside title-->
                 <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">
-                    Your Sentences<br/>
-                    Your Sentences
+                    Design your idea<br/>
                 </h3>
                 <!--end::Aside title-->
             </div>
@@ -326,7 +325,6 @@
 
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{asset('/js/pages/custom/login/login-general.js')}}"></script>
-<script src="//code.tidio.co/l4ojkenprxtn1vbngidsf1u9o1ax3cff.js" async></script>
 
 <!--end::Page Scripts-->
 </body>

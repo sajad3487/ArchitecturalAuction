@@ -20,12 +20,17 @@ class UserRepository extends Repository
     }
 
     public function getAdmins (){
-        return User::where('user_type',2)
+        return User::where('user_type',3)
             ->get();
     }
 
     public function countUser(){
-        return User::where('user_type',1)->count();
+        return User::where('user_type','!=',1)->count();
+    }
+
+    public function getCustomers (){
+        return User::where('user_type','!=',3)
+            ->get();
     }
 
 }
