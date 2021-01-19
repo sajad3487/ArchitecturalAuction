@@ -131,7 +131,7 @@
 
                 <!--begin::Aside title-->
                 <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">
-                    Design your idea<br/>
+                    Design and increase your income<br/>
                 </h3>
                 <!--end::Aside title-->
             </div>
@@ -154,11 +154,11 @@
                         @csrf
                         <!--begin::Title-->
                         <div class="pb-13 pt-lg-0 pt-5">
-                            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Sign Up as Client</h3>
+                            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Sign Up As a Designer</h3>
                             <p class="text-muted font-weight-bold font-size-h4">Enter your details to create your account or <a href="{{url('/login')}}" id="kt_login_signup" class="text-primary font-weight-bolder">Login</a></p>
                         </div>
                         <!--end::Title-->
-                            <input type="number" name="user_type" value="2" class="d-none">
+                            <input type="number" name="user_type" value="1" class="d-none">
 
                         <!--begin::Form group-->
                         <div class="form-group">

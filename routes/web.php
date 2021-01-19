@@ -40,8 +40,8 @@ Route::group(['middleware'=>'auth'],function (){
     });
 });
 
-Route::get('/', function (){
-    return view('welcome');
+Route::get('/designer_register', function (){
+    return view('auth.designer_register');
 });
 
 Route::get('home',function (){
