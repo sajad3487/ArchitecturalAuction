@@ -102,7 +102,6 @@ class ProjectController extends Controller
         $data['net_price'] = $this->calculate_net_price($data['category_id'], $data['size']);
         $data['total_price'] = (int)$this->calculate_total_price($data['category_id'], $data['net_price']);
         $project = $this->projectService->createProject($data);
-
         if (isset($request->file)) {
             $image['media_path'] = $this->mediaService->uploadMedia($request->file);
             $image['type'] = 'project';

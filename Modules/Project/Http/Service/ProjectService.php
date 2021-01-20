@@ -56,10 +56,14 @@ class ProjectService
 
     public function designerSentProposalProject ($user_id){
         $proposals = $this->proposalService->getAllProposalOfDesigner($user_id);
-        foreach ($proposals as $key=>$proposal){
-            $projects[$key] = $this->projectRepository->getProjectById($proposal->project_id);
+        if ($proposals->count() != 0){
+            foreach ($proposals as $key=>$proposal){
+                $projects[$key] = $this->projectRepository->getProjectById($proposal->project_id);
+            }
+            return $projects;
+        }else{
+            return [];
         }
-        return $projects;
     }
 
     public function designerWonProject ($user_id){

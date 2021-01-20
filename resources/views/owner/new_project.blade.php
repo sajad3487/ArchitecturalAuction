@@ -65,13 +65,13 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input type="text" name="title" class="form-control form-control-solid" value="{{old('title') ?? $project->title ?? ''}}" placeholder="Project title"/>
+                                    <input type="text" name="title" class="form-control form-control-solid" value="{{old('title') ?? $project->title ?? ''}}" placeholder="Project title"  required/>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Category</label>
-                                            <select class="form-control form-control-solid" @if(isset($project)) disabled @endif name="category_id">
+                                            <select class="form-control form-control-solid" @if(isset($project)) disabled @endif name="category_id" required>
                                                 <option>Please select your category</option>
                                                 @foreach($categories as $category)
                                                 <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">{{$category->title ?? ''}}</option>
@@ -85,7 +85,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Country</label>
-                                            <select name="country"
+                                            <select name="country" required
                                                     class="form-control form-control-solid">
                                                 <option value="" selected>Select
                                                 </option>
@@ -600,17 +600,17 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Size (m2)</label>
-                                            <input type="number" value="{{old('size') ?? $project->size ?? ''}}" @if(isset($project)) disabled @endif name="size" class="form-control form-control-solid" placeholder="Project size"/>
+                                            <input type="number" value="{{old('size') ?? $project->size ?? ''}}" @if(isset($project)) disabled @endif name="size" class="form-control form-control-solid" placeholder="Project size" required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" name="address" class="form-control form-control-solid" placeholder="Project address" value="{{old('address') ?? $project->address ?? ''}}"/>
+                                    <input type="text" name="address" class="form-control form-control-solid" placeholder="Project address" value="{{old('address') ?? $project->address ?? ''}}" required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleTextarea">Description</label>
-                                    <textarea name="description" class="form-control form-control-solid" rows="3" >{{old('description') ?? $project->description ?? ''}}</textarea>
+                                    <textarea name="description" class="form-control form-control-solid" rows="3"  required>{{old('description') ?? $project->description ?? ''}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleTextarea">Objectives</label>
@@ -620,7 +620,7 @@
                                     <div class="form-group col-md-4">
                                         <label for="exampleTextarea">Deadline</label>
                                         <div class="">
-                                            <input type="text" name="deadline" class="form-control" id="kt_datepicker_1"  readonly placeholder="Select date" value="{{old('deadline') ?? $project->deadline ?? ''}}"/>
+                                            <input type="text" name="deadline" class="form-control" id="kt_datepicker_1"  readonly placeholder="Select date" value="{{old('deadline') ?? $project->deadline ?? ''}}" required/>
                                         </div>
                                     </div>
 
@@ -628,7 +628,7 @@
                                         <label>File Browser</label>
                                         <div></div>
                                         <div class="custom-file">
-                                            <input type="file" name="file" class="custom-file-input" id="customFile"/>
+                                            <input type="file" name="file" class="custom-file-input" id="customFile" required/>
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
                                     </div>

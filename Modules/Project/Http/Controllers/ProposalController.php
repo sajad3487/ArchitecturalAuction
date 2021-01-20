@@ -83,6 +83,7 @@ class ProposalController extends Controller
         $user = $this->userService->getUserById(auth()->id());
         $projects = $this->projectService->designerSentProposalProject($user->id);
         $active = 2;
+//        dd($user,$projects);
         return view('customer.sent_proposal',compact('active','user','projects'));
     }
 }
