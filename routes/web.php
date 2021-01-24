@@ -51,3 +51,6 @@ Route::get('/designer_register', function (){
 Route::get('home',function (){
     return redirect('designer');
 });
+Route::get('/',function (){
+    return redirect('http://dominicanpodcast.com/');
+});
