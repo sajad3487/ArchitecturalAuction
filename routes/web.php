@@ -17,6 +17,10 @@ Auth::routes();
 //Route::post('login',function (Request $request){
 //        dd($request->all());
 //});
+Route::get('/run-migrations', function () {
+    return Artisan::call('migrate', ["--force" => true ]);
+});
+
 Route::group(['middleware'=>'auth'],function (){
    Route::group(['prefix'=>'designer','middleware'=>'CheckUser'],function (){
 
