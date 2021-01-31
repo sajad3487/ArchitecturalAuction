@@ -96,10 +96,14 @@ class ProjectController extends Controller
     {
         $data = $request->all();
         unset($data['file']);
+        $result = $this->checkPriceForCategory($data['net_price'],$data['category_id']);
+        if ($result == "false"){
+            return redirect("owner/project/new")->with('error', 'Your price should be in range of category price');
+        }
         $data['owner_id'] = auth()->id();
         $date = Carbon::parse($request->deadline)->timestamp;
         $data['deadline'] = date('Y-m-d H:i:s', $date);
-        $data['net_price'] = $this->calculate_net_price($data['category_id'], $data['size']);
+//        $data['net_price'] = $this->calculate_net_price($data['category_id'], $data['size']);
         $data['total_price'] = (int)$this->calculate_total_price($data['category_id'], $data['net_price']);
         $project = $this->projectService->createProject($data);
         if (isset($request->file)) {
@@ -182,12 +186,19 @@ class ProjectController extends Controller
         }
         $data = $request->all();
         unset($data['file']);
+        $result = $this->checkPriceForCategory($data['price'],$data['category_id']);
+        if ($result == "false"){
+            return redirect("owner/project/new")->with('error', 'Your price should be in range of category price');
+        }
         $date = Carbon::parse($request->deadline)->timestamp;
         $data['deadline'] = date('Y-m-d H:i:s', $date);
         if (isset($data['country']) && $data['country'] == null) {
             unset($data['country']);
         }
         $this->projectService->updateOwnerProject($data, $id);
+        if ($data['status'] == 1){
+            return redirect("owner/project/" . $id . "/invoice");
+        }
         return redirect("owner/project/" . $id . "/view");
     }
 
@@ -227,5 +238,13 @@ class ProjectController extends Controller
         $categories = $this->categoryService->getAllCategory();
         $active = 1;
         return view('owner.index',compact('user','projects','categories','active'));
+    }
+
+    public function checkPriceForCategory ($price,$category_id){
+        $category = $this->categoryService->getCategoryById($category_id);
+        if($category->min_price > $price || $category->max_price < $price){
+            return "false";
+        }
+        return "true";
     }
 }

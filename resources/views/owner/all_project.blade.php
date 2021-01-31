@@ -17,7 +17,7 @@
                             <div class="card-body rounded p-0 d-flex bg-light justify-content-between">
                                 <div
                                     class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-650px py-10 py-md-6 px-6 px-md-20 pr-lg-0">
-                                    <h1 class="font-weight-bolder text-dark m-0">Previous Projects</h1>
+                                    <h1 class="font-weight-bolder text-dark m-0">All Projects</h1>
                                 {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
 
                                 </div>
@@ -122,6 +122,51 @@
                             </div>
                             <!--end::Nav Panel Widget 4-->
                         </div>
+                        @elseif($project->status == 1)
+                            <div class="col-md-4">
+                                <!--begin::Nav Panel Widget 4-->
+                                <div class="card card-custom card-stretch gutter-b">
+                                    <!--begin::Body-->
+                                    <div class="card-body">
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex justify-content-between flex-column h-100">
+                                            <!--begin::Container-->
+                                            <div class="h-100">
+                                                <!--begin::Header-->
+                                                <div class="d-flex flex-column flex-center">
+                                                    <!--begin::Image-->
+                                                    <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url({{asset($project->project_image[0]->media_path)}})"></div>
+                                                    <!--end::Image-->
+
+                                                    <!--begin::Title-->
+                                                    <a href="{{url("owner/project/$project->id/view")}}" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$project->title ?? ''}}</a>
+                                                    <!--end::Title-->
+
+                                                    <!--begin::Text-->
+                                                    <div class="font-weight-bold text-dark-50 font-size-sm ">
+                                                        <h6 class="mt-3 text-danger my-3">Unpaid</h6>
+                                                    </div>
+                                                    <!--end::Text-->
+                                                </div>
+                                                <!--end::Header-->
+                                            </div>
+                                            <!--eng::Container-->
+
+                                            <!--begin::Footer-->
+                                            <div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="" data-placement="right" data-original-title="">
+                                                <h6 class="col-6 m-0 p-0">Price : {{$project->net_price ?? ''}} $</h6>
+
+                                                <a href="{{url("owner/project/$project->id/edit")}}" class="btn btn-outline-success font-weight-bolder font-size-sm py-3 px-14">Pay</a>
+                                            </div>
+                                            <!--end::Footer-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Body-->
+                                </div>
+                                <!--end::Nav Panel Widget 4-->
+                            </div>
+
                         @else
                             <div class="col-md-4">
                                 <!--begin::Nav Panel Widget 4-->

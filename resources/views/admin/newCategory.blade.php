@@ -62,21 +62,23 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-2 col-form-label text-right">Size (m2) :</label>
+                                            <label class="col-lg-2 col-form-label text-right">Minimum Price :</label>
                                             <div class="col-lg-3">
-                                                <input type="number" name="size" class="form-control" placeholder="Enter default size" value="{{old('size') ?? $category->size  ?? ''}}" required/>
+                                                <input type="number" name="min_price" class="form-control" placeholder="Enter min price" value="{{old('min_price') ?? $category->min_price  ?? ''}}"/>
                                             </div>
-                                            <label class="col-lg-2 col-form-label text-right">Price :</label>
+                                            <label class="col-lg-2 col-form-label text-right">Maximum Price :</label>
                                             <div class="col-lg-3">
-                                                <input type="number" name="price" class="form-control" placeholder="Enter price per size" value="{{old('price') ?? $category->price  ?? ''}}"/>
+                                                <input type="number" name="max_price" class="form-control" placeholder="Enter max price" value="{{old('max_price') ?? $category->max_price  ?? ''}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-2 col-form-label text-right">Commission (%) :</label>
                                             <div class="col-lg-3">
-                                                <input type="number" name="commission" class="form-control" placeholder="Enter percentage of commission" value="{{old('size') ?? $category->size  ?? ''}}" required/>
+                                                <input type="number" name="commission" class="form-control" placeholder="Enter percentage of commission" value="{{old('commission') ?? $category->commission  ?? ''}}" required/>
                                             </div>
+
                                         </div>
+
                                     </div>
                                     <div class=" {{isset($category) ? "col-lg-2" : 'col-lg-0'}}">
                                         <img src="{{$category->image_path ?? ''}}" alt="" class=" w-100">

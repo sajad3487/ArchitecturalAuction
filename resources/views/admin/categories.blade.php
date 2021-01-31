@@ -72,6 +72,8 @@
                                                         <th>#</th>
                                                         <th>Title</th>
                                                         <th>Description</th>
+                                                        <th>Min Price</th>
+                                                        <th>Max Price</th>
                                                         <th>Image</th>
                                                         <th>status</th>
                                                         <th>Action</th>
@@ -85,6 +87,8 @@
                                                             <td>{{$subCat->id ?? ''}}</td>
                                                             <td>{{$subCat->title ?? ''}}</td>
                                                             <td>{{$subCat->description ?? ''}}</td>
+                                                            <td>{{$subCat->min_price.'$' ?? ''}}</td>
+                                                            <td>{{$subCat->max_price.'$' ?? ''}}</td>
                                                             <td class="text-center">
                                                                 <a href="{{$subCat->image_path ?? ''}}" target="_blank"><img src="{{$subCat->image_path ?? ''}}" style="width: 50px;height: 50px" alt=""></a>
                                                             </td>

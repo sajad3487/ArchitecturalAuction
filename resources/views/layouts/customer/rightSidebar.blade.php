@@ -85,7 +85,7 @@
 
                 </div>
             </a>
-            <a href="{{url('customer/profile')}}" class="navi-item">
+            <a href="{{url('designer/profile')}}" class="navi-item">
                 <div class="navi-link">
                     <div class="symbol symbol-40 bg-light mr-3">
                         <div class="symbol-label">

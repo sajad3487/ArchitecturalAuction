@@ -236,9 +236,15 @@
                                                 <div class="comments-section pt-0 border-0">
                                                     @foreach($walls as $wall)
                                                         <div class="comment-post my-1">
-                                                            <div class="comment-img"><img src="{{asset('media/icon/designer.png')}}"/></div>
+                                                            <div class="comment-img">
+                                                                @if($wall->user->user_type == 1)
+                                                                <img src="{{asset('media/icon/designer.png')}}"/>
+                                                                @else
+                                                                <img src="{{asset('media/icon/owner.png')}}"/>
+                                                                @endif
+                                                            </div>
                                                             <div class="comment-details">
-                                                                <p><span class="comment-author">@if($wall->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@else Designer No: {{$wall->user_id ?? ''}}@endif</span><span class="comment-time"></span></p>
+                                                                <p><span class="comment-author">@if($wall->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@elseif($wall->user->user_type == 1)Designer No :{{$wall->user_id ?? ''}}@else Owner @endif</span><span class="comment-time"></span></p>
                                                                 <p class="comment-content">{{$wall->text ?? ''}}</p>
                                                                     <div class="accordion accordion-light row" id="accordionExample-{{$wall->id}}">
                                                                         <div class="card">
@@ -266,9 +272,15 @@
                                                         </div>
                                                         @foreach($wall->answer as $answer)
                                                             <div class="comment-post-reply mb-2">
-                                                                <div class="comment-img"><img src="{{asset('media/icon/owner.png')}}"/></div>
+                                                                <div class="comment-img">
+                                                                    @if($answer->user->user_type == 1)
+                                                                        <img src="{{asset('media/icon/designer.png')}}"/>
+                                                                    @else
+                                                                        <img src="{{asset('media/icon/owner.png')}}"/>
+                                                                    @endif
+                                                                </div>
                                                                 <div class="comment-details">
-                                                                    <p><span class="comment-author">@if($answer->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@else @if($answer->user->user_type == 1)Designer No :{{$answer->user_id ?? ''}}@else Owner @endif @endif</span><span class="comment-time"></span></p>
+                                                                    <p><span class="comment-author">@if($answer->user_id == $user->id){{$user->name ?? 'You'}} {{$user->fname ?? ''}}@elseif($answer->user->user_type == 1)Designer No :{{$answer->user_id ?? ''}}@else Owner @endif</span><span class="comment-time"></span></p>
                                                                     <p class="comment-content">{{$answer->text ?? ''}} </p>
                                                                         <div class="accordion accordion-light row " id="accordionExample-{{$answer->id}}">
                                                                             <div class="card">

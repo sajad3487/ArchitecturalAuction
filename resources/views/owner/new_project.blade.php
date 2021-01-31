@@ -23,6 +23,8 @@
                                             @else
                                             New Project
                                             @endif
+
+
                                     </h1>
                                 {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
 
@@ -49,6 +51,20 @@
                 <div class="card card-custom">
                     <div class="card-body p-0">
 
+
+
+
+                    @if(Session::has('error'))
+                            <div class="alert alert-custom alert-outline-danger fade show m-5" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                <div class="alert-text">{{ Session::get('error') }}</div>
+                                <div class="alert-close">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                        @endif
                         <form class="form" action="
                             @if(isset($project))
                             {{url("owner/project/$project->id/update")}}
@@ -59,6 +75,7 @@
 
                             @if(isset($project))
                                 @method('PUT')
+                                <input type="number" name="status" value="{{$project->status}}" class="d-none">
                             @endif
 
                             @csrf
@@ -74,9 +91,9 @@
                                             <select class="form-control form-control-solid" @if(isset($project)) disabled @endif name="category_id" required>
                                                 <option>Please select your category</option>
                                                 @foreach($categories as $category)
-                                                <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">{{$category->title ?? ''}}</option>
+                                                <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">{{$category->title ?? ''}} (min: {{$subCate->min_price ?? ''}}$ - max: {{$subCate->max_price ?? ''}}$)</option>
                                                     @foreach($category->subCategory as $subCate)
-                                                        <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">--- {{$subCate->title ?? ''}}</option>
+                                                        <option @if(isset($project) && $project->category->id == $category->id)selected @endif value="{{$category->id ?? ''}}">- {{$subCate->title ?? ''}} (min: {{$subCate->min_price ?? ''}}$ - max: {{$subCate->max_price ?? ''}}$)</option>
                                                         @endforeach
                                                     @endforeach
                                             </select>
@@ -84,8 +101,28 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="number" value="{{old('net_price') ?? $project->net_price ?? ''}}" @if(isset($project)) disabled @endif name="net_price" class="form-control form-control-solid" placeholder="Project price" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Size (m2)</label>
+                                            <input type="number" value="{{old('size') ?? $project->size ?? ''}}" @if(isset($project)) disabled @endif name="size" class="form-control form-control-solid" placeholder="Project size" required/>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" name="address" class="form-control form-control-solid" placeholder="Project address" value="{{old('address') ?? $project->address ?? ''}}" required/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4 pl-0">
+                                        <div class="form-group">
                                             <label>Country</label>
-                                            <select name="country" required
+                                            <select name="country"
                                                     class="form-control form-control-solid">
                                                 <option value="" selected>Select
                                                 </option>
@@ -597,16 +634,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Size (m2)</label>
-                                            <input type="number" value="{{old('size') ?? $project->size ?? ''}}" @if(isset($project)) disabled @endif name="size" class="form-control form-control-solid" placeholder="Project size" required/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <input type="text" name="address" class="form-control form-control-solid" placeholder="Project address" value="{{old('address') ?? $project->address ?? ''}}" required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleTextarea">Description</label>
@@ -625,12 +652,13 @@
                                     </div>
 
                                     <div class="form-group  col-md-4 ">
-                                        <label>File Browser</label>
+                                        <label>Main image of project : </label>
                                         <div></div>
                                         <div class="custom-file">
-                                            <input type="file" name="file" class="custom-file-input" id="customFile" required/>
+                                            <input type="file" name="file" class="custom-file-input" id="customFile" />
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
+                                        <span class="form-text text-muted">(You can add more files and images after the submission of project)</span>
                                     </div>
                                 </div>
 {{--                                <div class="form-group row">--}}
@@ -641,9 +669,13 @@
 {{--                                </div>--}}
                             </div>
 
-                            <div class="card-footer">
-                                <a href="@if(isset($project)) {{url("owner/project/$project->id/view")}}@else{{url('owner/project')}}@endif" class="btn btn-secondary">Cancel</a>
-                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <div class="card-footer text-center">
+                                <a href="@if(isset($project)) {{url("owner/project/$project->id/view")}}@else{{url('owner/project')}}@endif" class="btn btn-secondary mx-1  w-100px">Back</a>
+                                @if(isset($project) && $project->status != 1)
+                                    <button type="submit" class="btn btn-primary mr-2 w-100px mx-1">Save</button>
+                                @else
+                                    <button type="submit" class="btn btn-success mr-2 w-100px mx-1">Pay</button>
+                                    @endif
                             </div>
                         </form>
 

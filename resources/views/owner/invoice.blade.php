@@ -104,8 +104,9 @@
                     <div class="row justify-content-center border-top py-4 px-8 py-md-8 px-md-0">
                         <div class="col-md-9">
                             <div class="d-flex font-size-sm flex-wrap">
+                                <a href="{{url("owner/project/$project->id/edit")}}"  class="btn btn-warning w-110px font-weight-bolder py-4 mr-3 mr-sm-14 my-1">Back</a>
                                 <button type="button" class="btn btn-primary w-110px font-weight-bolder py-4 mr-3 mr-sm-14 my-1" onclick="window.print();">Print</button>
-                                <a href="{{url("owner/project/$project->id/pay")}}" class="btn btn-warning w-110px font-weight-bolder ml-sm-auto my-1 pt-4">Pay</a>
+                                <a href="{{url("owner/project/$project->id/pay")}}" class="btn btn-success w-110px font-weight-bolder ml-sm-auto my-1 pt-4">Pay</a>
                             </div>
                         </div>
                     </div>
